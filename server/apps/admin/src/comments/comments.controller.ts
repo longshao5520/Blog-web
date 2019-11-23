@@ -43,6 +43,12 @@ export class CommentsController {
   @Get('option')
   option(){
     return{
+      border:true,
+      index:true,
+      indexLabel:'序号',
+      page:false,
+      align:'center',
+      menuAlign:'center',
       title:'评论管理',
       column:[
         {

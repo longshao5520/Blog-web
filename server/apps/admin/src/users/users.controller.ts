@@ -8,28 +8,28 @@ import { Crud } from 'nestjs-mongoose-crud'
   model: User,
   routes: {
     find: {
-      decorators:[
-        ApiOperation({title: '用户列表'})
+      decorators: [
+        ApiOperation({ title: '用户列表' })
       ]
     },
     findOne: {
-      decorators:[
-        ApiOperation({title: '用户详情'})
+      decorators: [
+        ApiOperation({ title: '用户详情' })
       ]
     },
     update: {
-      decorators:[
-        ApiOperation({title: '修改用户'})
+      decorators: [
+        ApiOperation({ title: '修改用户' })
       ]
     },
     create: {
-      decorators:[
-        ApiOperation({title: '新建用户'})
+      decorators: [
+        ApiOperation({ title: '新建用户' })
       ]
     },
     delete: {
-      decorators:[
-        ApiOperation({title: '删除用户'})
+      decorators: [
+        ApiOperation({ title: '删除用户' })
       ]
     },
   }
@@ -38,41 +38,51 @@ import { Crud } from 'nestjs-mongoose-crud'
 @Controller('users')
 @ApiUseTags('用户')
 export class UsersController {
-  constructor(@InjectModel(User) private readonly model) {}
+  constructor(@InjectModel(User) private readonly model) { }
 
   @Get('option')
-  option(){
-    return{
-      title:'用户管理',
-      column:[
+  option() {
+    return {
+      border: true,
+      index: true,
+      indexLabel: '序号',
+      page: false,
+      align: 'center',
+      menuAlign: 'center',
+      title: '用户管理',
+      column: [
         {
-          label:'用户名',
-          prop:'username'
+          label: '用户名',
+          prop: 'username'
         },
         {
-          label:'真实姓名',
-          prop:'ealname'
+          label: '真实姓名',
+          prop: 'ealname'
         },
         {
-          label:'生日',
-          prop:'birthday'
+          label: '生日',
+          prop: 'birthday'
         },
         {
-          label:'性别',
-          prop:'sex'
+          label: '性别',
+          prop: 'sex'
         },
         {
-          label:'手机号',
-          prop:'phone'
+          label: '手机号',
+          prop: 'phone'
         },
         {
-          label:'邮箱',
-          prop:'email'
+          label: '邮箱',
+          prop: 'email'
         },
         {
-          label:'QQ',
-          prop:'qq'
+          label: 'QQ',
+          prop: 'qq'
         },
+        // {
+        //   label: '管理员',
+        //   prop: 'fig'
+        // },
       ]
     }
   }

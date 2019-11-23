@@ -43,6 +43,12 @@ export class PhotosController {
   @Get('option')
   option(){
     return{
+      border:true,
+      index:true,
+      indexLabel:'序号',
+      page:false,
+      align:'center',
+      menuAlign:'center',
       title:'相片管理',
       column:[
         {

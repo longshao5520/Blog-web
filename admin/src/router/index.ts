@@ -1,20 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Main from '../views/Main.vue'
 import ResourceCrud from '../views/ResourceCrud.vue'
+import CreateBlog from '../views/blogs/CreateBlog.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    component: Main,
-    children: [
-      {name: 'home', path: '/', component: Home}, 
-      {name: 'courses-crud', path: '/:resource/list', component: ResourceCrud, props: true},
-    ]
-  }
+    redirect: '/blogs/list',
+  },
+  {
+    path: '/:resource/list', 
+    name: 'courses-crud',
+    component: ResourceCrud, 
+    props: true
+  },
+  {
+    name: 'blog - create', 
+    path: '/blogs/create', 
+    component: CreateBlog, 
+    props: true
+  },
+  
 ]
 
 const router = new VueRouter({

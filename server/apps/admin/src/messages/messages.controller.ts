@@ -43,11 +43,17 @@ export class MessagesController {
   @Get('option')
   option(){
     return{
+      border:true,
+      index:true,
+      indexLabel:'序号',
+      page:false,
+      align:'center',
+      menuAlign:'center',
       title:'留言管理',
       column:[
         {
-          label:'用户id',
-          prop:'userid'
+          label:'作者',
+          prop:'author'
         },
         {
           label:'评论内容',

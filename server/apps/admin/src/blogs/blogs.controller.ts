@@ -43,6 +43,12 @@ export class BlogsController {
   @Get('option')
   option(){
     return{
+      border:true,
+      index:true,
+      indexLabel:'序号',
+      page:false,
+      align:'center',
+      menuAlign:'center',
       title:'文章管理',
       column:[
         {
@@ -55,7 +61,8 @@ export class BlogsController {
         },
         {
           label:'内容',
-          prop:'connect'
+          prop:'connect',
+          // formslot:true
         },
         {
           label:'封面',

@@ -10,7 +10,7 @@ export class Message{
 
   @ApiModelProperty({description: '用户id'})
   @prop()
-  userid: string
+  author: string
 
   @ApiModelProperty({description: '评论内容'})
   @prop()
