@@ -16,12 +16,12 @@ const routes = [
     component: ResourceCrud, 
     props: true
   },
-  {
-    name: 'blog - create', 
-    path: '/blogs/create', 
-    component: CreateBlog, 
-    props: true
-  },
+  // {
+  //   name: 'blog - create', 
+  //   path: '/blogs/create', 
+  //   component: CreateBlog, 
+  //   props: true
+  // },
   
 ]
 

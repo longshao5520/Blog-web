@@ -7,9 +7,13 @@ import { BlogsModule } from './blogs/blogs.module';
 import { CommentsModule } from './comments/comments.module';
 import { MessagesModule } from './messages/messages.module';
 import { PhotosModule } from './photos/photos.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
+    MulterModule.register({
+      dest: 'uploads'
+    }),
     DbModule,
     UsersModule,
     BlogsModule,

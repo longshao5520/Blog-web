@@ -53,11 +53,16 @@ export class PhotosController {
       column:[
         {
           label:'名称',
-          prop:'tpmc'
+          prop:'tpmc',
+          row:'true'
         },
         {
           label:'图片路径',
-          prop:'file'
+          prop:'file',
+          type:'upload',
+          listType:'picture-img',
+          action:'/upload',
+          width: '120',
         },
       ]
     }

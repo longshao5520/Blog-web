@@ -53,25 +53,29 @@ export class BlogsController {
       column:[
         {
           label:'标题',
-          prop:'title'
+          prop:'title',
         },
         {
           label:'标签',
-          prop:'label'
+          prop:'label',
         },
         {
           label:'内容',
           prop:'connect',
-          // formslot:true
-        },
-        {
-          label:'封面',
-          prop:'cover'
         },
         {
           label:'作者',
-          prop:'author'
+          prop:'author',
         },
+        {
+          label:'封面',
+          prop:'cover',
+          type:'upload',
+          listType:'picture-img',
+          action:'/upload',
+          width: '120',
+        },
+        
       ]
     }
   }

@@ -59,7 +59,7 @@ export default class App extends Vue {
         icon: 'el-icon-tickets',
         items: [
           { title: '文章列表', icon: 'el-icon-document', path: '/blogs/list'},
-          { title: '新建文章', icon: 'el-icon-document-add', path: '/blogs/create'},
+          // { title: '新建文章', icon: 'el-icon-document-add', path: '/blogs/create'},
           { title: '评论管理', icon: 'el-icon-edit', path: '/comments/list'},
           { title: '相片管理', icon: 'el-icon-picture-outline-round', path: '/photos/list'},
           { title: '留言管理', icon: 'el-icon-tickets', path: '/messages/list'},
@@ -95,5 +95,8 @@ body{
 }
 .ss{
   margin-top: 15%;
+}
+.avue-upload__avatar{
+  height: auto !important;
 }
 </style>

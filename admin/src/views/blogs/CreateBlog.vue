@@ -12,7 +12,7 @@
         <el-input v-model="blog.cover"></el-input>
       </el-form-item>
       <el-form-item label="文章内容">
-        <el-input type="textarea" v-model="blog.connect" rows="25"></el-input>
+        <el-input type="textarea" v-model="blog.connect" rows="22"></el-input>
       </el-form-item>
       <el-form-item style="float:right;">
         <el-button type="primary" native-type="submit">发布</el-button>
@@ -28,11 +28,16 @@ import { Vue } from "vue-property-decorator";
 export default class CreateBlog extends Vue {
   blog = {
     title: "",
-    label: "",
+    label: [],
     connect: "",
     cover: "",
     author: "longshao"
   };
+  tagg = {
+    inputVisible: false,
+    inputValue: ''
+  }
+  
 
   async saveBlog() {
     await this.$http.post("blogs", this.blog);
@@ -43,19 +48,4 @@ export default class CreateBlog extends Vue {
 </script>
 
 <style>
-.el-tag + .el-tag {
-  margin-left: 10px;
-}
-.button-new-tag {
-  margin-left: 10px;
-  height: 32px;
-  line-height: 30px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.input-new-tag {
-  width: 90px;
-  margin-left: 10px;
-  vertical-align: bottom;
-}
 </style>
