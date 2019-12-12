@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ResourceCrud from '../views/ResourceCrud.vue'
+import Login from '../views/Login.vue'
+import Main from '../views/Main.vue'
 import CreateBlog from '../views/blogs/CreateBlog.vue'
 
 Vue.use(VueRouter)
@@ -8,20 +10,19 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/blogs/list',
+    component: Main, 
+    children: [
+      {name: 'home', path: '/', redirect: '/blogs/list',}, 
+      {name: 'courses - crud', path: '/:resource/list', component: ResourceCrud, props: true},
+      {name: 'blog - create', path: '/blogs/create', component: CreateBlog, props: true},
+    ]
   },
   {
-    path: '/:resource/list', 
-    name: 'courses-crud',
-    component: ResourceCrud, 
+    name: 'login', 
+    path: '/login', 
+    component: Login, 
     props: true
   },
-  // {
-  //   name: 'blog - create', 
-  //   path: '/blogs/create', 
-  //   component: CreateBlog, 
-  //   props: true
-  // },
   
 ]
 

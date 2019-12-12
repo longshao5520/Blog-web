@@ -38,8 +38,4 @@ export class User{
   @ApiModelProperty({description: 'QQ', example: '2111111112'})
   @prop()
   qq: string
-
-  @ApiModelProperty({description: '是否管理员', example: 'false'})
-  @prop()
-  fig: boolean
 }

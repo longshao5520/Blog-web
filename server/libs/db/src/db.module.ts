@@ -6,9 +6,10 @@ import { Blog } from './models/blog.model'
 import { Photo } from './models/photo.model'
 import { Comment } from './models/comment.model'
 import { Message } from './models/message.model'
+import { Admin } from './models/admin.model'
 
 
-const models = TypegooseModule.forFeature([User, Blog, Comment, Photo, Message])
+const models = TypegooseModule.forFeature([User, Blog, Comment, Photo, Message, Admin])
 
 @Global()
 @Module({

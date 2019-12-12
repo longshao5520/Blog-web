@@ -9,6 +9,7 @@ async function bootstrap() {
   app.useStaticAssets('uploads',{
     prefix: '/uploads'
   })
+  
   const options = new DocumentBuilder()
     .setTitle('视频网站 - 后台管理API')
     .setDescription('供后台管理界面调用的服务端API')

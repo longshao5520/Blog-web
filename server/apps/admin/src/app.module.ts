@@ -8,6 +8,10 @@ import { CommentsModule } from './comments/comments.module';
 import { MessagesModule } from './messages/messages.module';
 import { PhotosModule } from './photos/photos.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { AdminsModule } from './admins/admins.module';
+
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -20,6 +24,7 @@ import { MulterModule } from '@nestjs/platform-express';
     CommentsModule,
     MessagesModule,
     PhotosModule,
+    AdminsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
