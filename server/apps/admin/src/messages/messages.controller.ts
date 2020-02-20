@@ -2,62 +2,71 @@ import { Controller, Get } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { Message } from '@libs/db/models/message.model';
 import { Crud } from 'nestjs-mongoose-crud'
-import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ReturnModelType } from '@typegoose/typegoose';
+import { User } from '@libs/db/models/user.model';
 
 @Crud({
   model: Message,
   routes: {
     find: {
-      decorators:[
-        ApiOperation({title: '留言列表'})
+      decorators: [
+        ApiOperation({ summary: '留言列表' })
       ]
     },
     findOne: {
-      decorators:[
-        ApiOperation({title: '留言详情'})
+      decorators: [
+        ApiOperation({ summary: '留言详情' })
       ]
     },
     update: {
-      decorators:[
-        ApiOperation({title: '修改留言'})
+      decorators: [
+        ApiOperation({ summary: '修改留言' })
       ]
     },
     create: {
-      decorators:[
-        ApiOperation({title: '新建留言'})
+      decorators: [
+        ApiOperation({ summary: '新建留言' })
       ]
     },
     delete: {
-      decorators:[
-        ApiOperation({title: '删除留言'})
+      decorators: [
+        ApiOperation({ summary: '删除留言' })
       ]
     },
   }
 })
 
 @Controller('messages')
-@ApiUseTags('留言')
+@ApiTags('留言')
 export class MessagesController {
-  constructor(@InjectModel(Message) private readonly model) {}
+  constructor(
+    @InjectModel(Message) private readonly model: ReturnModelType<typeof Message>,
+    @InjectModel(User) private readonly userModel: ReturnModelType<typeof User>,
+  ) { }
 
   @Get('option')
-  option(){
-    return{
-      border:true,
-      index:true,
-      indexLabel:'序号',
-      page:false,
-      align:'center',
-      menuAlign:'center',
-      title:'留言管理',
-      column:[
+  async option() {
+    const user = (await this.userModel.find()).map(v => ({
+      label: v.username,
+      value: v._id
+    }))
+    return {
+      index: true,
+      stripe: true,
+      editBtn: false,
+      addBtn: false,
+      align: 'center',
+      menuAlign: 'center',
+      column: [
         {
-          label:'作者',
-          prop:'author'
+          label: '作者',
+          prop: 'author',
+          dicData: user
         },
         {
-          label:'评论内容',
-          prop:'connect'
+          label: '评论内容',
+          prop: 'connect'
         },
       ]
     }

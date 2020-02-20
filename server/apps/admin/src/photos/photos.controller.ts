@@ -2,66 +2,68 @@ import { Controller, Get } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { Photo } from '@libs/db/models/photo.model';
 import { Crud } from 'nestjs-mongoose-crud'
-import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ReturnModelType } from '@typegoose/typegoose';
 
 @Crud({
   model: Photo,
   routes: {
     find: {
-      decorators:[
-        ApiOperation({title: '列表'})
+      decorators: [
+        ApiOperation({ summary: '列表' })
       ]
     },
     findOne: {
-      decorators:[
-        ApiOperation({title: '详情'})
+      decorators: [
+        ApiOperation({ summary: '详情' })
       ]
     },
     update: {
-      decorators:[
-        ApiOperation({title: '修改'})
+      decorators: [
+        ApiOperation({ summary: '修改' })
       ]
     },
     create: {
-      decorators:[
-        ApiOperation({title: '新建'})
+      decorators: [
+        ApiOperation({ summary: '新建' })
       ]
     },
     delete: {
-      decorators:[
-        ApiOperation({title: '删除'})
+      decorators: [
+        ApiOperation({ summary: '删除' })
       ]
     },
   }
 })
 
 @Controller('photos')
-@ApiUseTags('相片')
+@ApiTags('相片')
 export class PhotosController {
-  constructor(@InjectModel(Photo) private readonly model) {}
+  constructor(
+    @InjectModel(Photo) private readonly model: ReturnModelType<typeof Photo>,
+  ) { }
 
   @Get('option')
-  option(){
-    return{
-      border:true,
-      index:true,
-      indexLabel:'序号',
-      page:false,
-      align:'center',
-      menuAlign:'center',
-      title:'相片管理',
-      column:[
+  option() {
+    return {
+      index: true,
+      stripe: true,
+      dialogType: 'drawer',
+      dialogWidth: '30%',
+      align: 'center',
+      menuAlign: 'center',
+      column: [
         {
-          label:'名称',
-          prop:'tpmc',
-          row:'true'
+          label: '名称',
+          prop: 'tpmc',
+          span: 24
         },
         {
-          label:'图片路径',
-          prop:'file',
-          type:'upload',
-          listType:'picture-img',
-          action:'/upload',
+          label: '图片路径',
+          prop: 'file',
+          type: 'upload',
+          listType: 'picture-img',
+          action: '/upload',
           width: '120',
         },
       ]

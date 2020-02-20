@@ -5,10 +5,15 @@ import './plugins/element'
 import './plugins/avue'
 import router from './router'
 
+import EleForm from 'vue-ele-form'
+
 Vue.config.productionTip = false
 
+// 注册 vue-ele-form
+Vue.use(EleForm)
+
 const http = axios.create({
-  baseURL: 'http://localhost:4000/apis/'
+  baseURL: process.env.VUE_APP_API_URL
 })
 Vue.prototype.$httpajax = http
 Vue.prototype.$http = http

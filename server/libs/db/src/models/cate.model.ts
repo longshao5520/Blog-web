@@ -6,12 +6,8 @@ import { ApiProperty } from '@nestjs/swagger'
     timestamps: true
   }
 })
-export class User {
+export class Cate {
   @ApiProperty()
   @prop()
-  username: string
-
-  @ApiProperty()
-  @prop()
-  password: string
+  title: string
 }

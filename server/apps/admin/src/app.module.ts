@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DbModule } from '@libs/db';
 import { UsersModule } from './users/users.module';
 import { BlogsModule } from './blogs/blogs.module';
 import { CommentsModule } from './comments/comments.module';
@@ -9,24 +8,36 @@ import { MessagesModule } from './messages/messages.module';
 import { PhotosModule } from './photos/photos.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { AdminsModule } from './admins/admins.module';
-
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { CatesModule } from './cates/cates.module';
+import { CommonModule } from 'libs/common/src';
+const MAO = require('multer-aliyun-oss');
 
 @Module({
   imports: [
-    MulterModule.register({
-      dest: 'uploads'
+    CommonModule,
+    MulterModule.registerAsync({
+      useFactory() {
+        return {
+          storage: MAO({
+            config: {
+              region: process.env.OSS_REGION,
+              accessKeyId: process.env.OSS_ACCESS_KEY_ID,
+              accessKeySecret: process.env.OSS_ACCESS_KEY_SECRET,
+              bucket: process.env.OSS_BUCKET
+            }
+          })
+        }
+      }
     }),
-    DbModule,
     UsersModule,
     BlogsModule,
     CommentsModule,
     MessagesModule,
     PhotosModule,
     AdminsModule,
+    CatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

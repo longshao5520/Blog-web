@@ -1,3 +1,3 @@
-declare module 'vue-ele-form'{
+declare module 'vue-ele-form' {
   export const install: () => any
 }

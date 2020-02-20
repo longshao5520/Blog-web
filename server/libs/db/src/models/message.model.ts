@@ -1,18 +1,17 @@
-import { prop, modelOptions} from '@typegoose/typegoose'
-import { ApiModelProperty } from '@nestjs/swagger'
+import { prop, modelOptions, Ref } from '@typegoose/typegoose'
+import { ApiProperty } from '@nestjs/swagger'
+import { User } from './user.model'
 
 @modelOptions({
   schemaOptions: {
     timestamps: true
   }
 })
-export class Message{
-
-  @ApiModelProperty({description: '用户id'})
-  @prop()
-  author: string
-
-  @ApiModelProperty({description: '评论内容'})
+export class Message {
+  @ApiProperty()
   @prop()
   connect: string
+
+  @prop({ ref: 'User' })
+  author: Ref<User>
 }

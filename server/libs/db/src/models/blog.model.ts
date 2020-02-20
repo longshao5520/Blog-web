@@ -1,29 +1,33 @@
-import { prop, modelOptions, arrayProp, Ref } from '@typegoose/typegoose'
-import { ApiModelProperty } from '@nestjs/swagger'
+import { prop, modelOptions, Ref } from '@typegoose/typegoose'
+import { ApiProperty } from '@nestjs/swagger'
+import { Cate } from './cate.model'
 
 @modelOptions({
   schemaOptions: {
     timestamps: true
   }
 })
-export class Blog{
-  @ApiModelProperty({description: '标题'})
+export class Blog {
+  @ApiProperty()
   @prop()
   title: string
 
-  @ApiModelProperty({description: '标签'})
+  @ApiProperty()
   @prop()
   label: string
 
-  @ApiModelProperty({description: '内容'})
+  @ApiProperty()
   @prop()
   connect: string
 
-  @ApiModelProperty({description: '封面'})
+  @ApiProperty()
   @prop()
   cover: string
 
-  @ApiModelProperty({description: '作者'})
+  @ApiProperty()
   @prop()
   author: string
+
+  @prop({ ref: 'Cate' })
+  cate: Ref<Cate>
 }

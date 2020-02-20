@@ -7,22 +7,28 @@ import { Photo } from './models/photo.model'
 import { Comment } from './models/comment.model'
 import { Message } from './models/message.model'
 import { Admin } from './models/admin.model'
+import { Cate } from './models/cate.model';
 
 
-const models = TypegooseModule.forFeature([User, Blog, Comment, Photo, Message, Admin])
+const models = TypegooseModule.forFeature([User, Blog, Cate, Comment, Photo, Message, Admin])
 
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://localhost/Blog-web',{
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
+    TypegooseModule.forRootAsync({
+      useFactory() {
+        return {
+          uri: process.env.DB,
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useCreateIndex: true,
+          useFindAndModify: false,
+        }
+      }
     }),
     models,
   ],
   providers: [DbService],
   exports: [DbService, models],
 })
-export class DbModule {}
+export class DbModule { }

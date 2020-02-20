@@ -5,23 +5,35 @@
       :page="page"
       :data="data.data"
       :option="option"
-      @row-save="create"
-      @row-update="update"
       @row-del="remove"
       @on-load="changePage"
-    ></avue-crud>
+    >
+      <template slot="menuLeft">
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="small"
+          @click="$router.push('/blogs/create')"
+        >新增</el-button>
+      </template>
+      <template slot-scope="scope" slot="menu">
+        <el-button
+          type="text"
+          icon="el-icon-edit"
+          size="small"
+          plain
+          @click="$router.push(`/blogs/edit/${scope.row._id}`)"
+        >编辑</el-button>
+      </template>
+    </avue-crud>
   </div>
 </template>
 
 <script lang='ts'>
 import { Vue, Component, Ref, Prop } from "vue-property-decorator";
 
-@Component({
-  // components: {
-  //   mavonEditor
-  // }
-})
-export default class ResourceList extends Vue {
+@Component({})
+export default class BlogsList extends Vue {
   @Prop(String) resource!: String;
   data = {};
   option = {};
@@ -33,7 +45,7 @@ export default class ResourceList extends Vue {
   query: any = {};
 
   async fetchOption() {
-    const res = await this.$http.get(`${this.resource}/option`);
+    const res = await this.$http.get(`/blogs/option`);
     this.option = res.data;
   }
 
@@ -44,7 +56,7 @@ export default class ResourceList extends Vue {
   }
 
   async fetch() {
-    const res = await this.$http.get(`${this.resource}`, {
+    const res = await this.$http.get(`/blogs`, {
       params: {
         query: this.query
       }
@@ -53,29 +65,13 @@ export default class ResourceList extends Vue {
     this.page.total = res.data.total;
   }
 
-  async create(row, done) {
-    await this.$http.post(`${this.resource}`, row);
-    this.$message.success("创建成功");
-    this.fetch();
-    done();
-  }
-
-  async update(row, index, done) {
-    const data = JSON.parse(JSON.stringify(row));
-    delete data.$index;
-    await this.$http.put(`${this.resource}/${row._id}`, data);
-    this.$message.success("编辑成功");
-    this.fetch();
-    done();
-  }
-
   async remove(row) {
     try {
       await this.$confirm("是否确认删除？");
     } catch (e) {
       return;
     }
-    await this.$http.delete(`${this.resource}/${row._id}`);
+    await this.$http.delete(`/blogs/${row._id}`);
     this.$message.success("删除成功");
     this.fetch();
   }
