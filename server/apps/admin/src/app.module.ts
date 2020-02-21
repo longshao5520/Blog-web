@@ -29,13 +29,13 @@ const MAO = require('multer-aliyun-oss');
         }
       }
     }),
-    UsersModule,
+    CatesModule,
     BlogsModule,
+    PhotosModule,
     CommentsModule,
     MessagesModule,
-    PhotosModule,
+    UsersModule,
     AdminsModule,
-    CatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -14,26 +14,14 @@ import { User } from '@libs/db/models/user.model';
         ApiOperation({ summary: '留言列表' })
       ]
     },
-    findOne: {
-      decorators: [
-        ApiOperation({ summary: '留言详情' })
-      ]
-    },
-    update: {
-      decorators: [
-        ApiOperation({ summary: '修改留言' })
-      ]
-    },
-    create: {
-      decorators: [
-        ApiOperation({ summary: '新建留言' })
-      ]
-    },
     delete: {
       decorators: [
         ApiOperation({ summary: '删除留言' })
       ]
     },
+    findOne: false,
+    update: false,
+    create: false,
   }
 })
 

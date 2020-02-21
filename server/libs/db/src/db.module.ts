@@ -10,7 +10,15 @@ import { Admin } from './models/admin.model'
 import { Cate } from './models/cate.model';
 
 
-const models = TypegooseModule.forFeature([User, Blog, Cate, Comment, Photo, Message, Admin])
+const models = TypegooseModule.forFeature([
+  User,
+  Blog,
+  Cate,
+  Comment,
+  Photo,
+  Message,
+  Admin
+])
 
 @Global()
 @Module({

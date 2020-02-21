@@ -5,12 +5,7 @@ import './plugins/element'
 import './plugins/avue'
 import router from './router'
 
-import EleForm from 'vue-ele-form'
-
 Vue.config.productionTip = false
-
-// 注册 vue-ele-form
-Vue.use(EleForm)
 
 const http = axios.create({
   baseURL: process.env.VUE_APP_API_URL

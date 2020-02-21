@@ -13,26 +13,15 @@ import { ReturnModelType } from '@typegoose/typegoose';
         ApiOperation({ summary: '用户列表' })
       ]
     },
-    findOne: {
-      decorators: [
-        ApiOperation({ summary: '用户详情' })
-      ]
-    },
-    update: {
-      decorators: [
-        ApiOperation({ summary: '修改用户' })
-      ]
-    },
-    create: {
-      decorators: [
-        ApiOperation({ summary: '新建用户' })
-      ]
-    },
     delete: {
       decorators: [
         ApiOperation({ summary: '删除用户' })
       ]
     },
+    findOne: false,
+    update: false,
+    create: false,
+
   }
 })
 

@@ -1,4 +1,4 @@
-import { prop, modelOptions, getModelForClass } from '@typegoose/typegoose'
+import { prop, modelOptions } from '@typegoose/typegoose'
 import { ApiProperty } from '@nestjs/swagger'
 
 @modelOptions({
@@ -15,5 +15,3 @@ export class Admin {
   @prop()
   password: string
 }
-
-export const AdminModel = getModelForClass(Admin)

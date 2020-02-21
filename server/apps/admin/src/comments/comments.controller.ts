@@ -15,26 +15,14 @@ import { User } from '@libs/db/models/user.model';
         ApiOperation({ summary: '评论列表' })
       ]
     },
-    findOne: {
-      decorators: [
-        ApiOperation({ summary: '评论详情' })
-      ]
-    },
-    update: {
-      decorators: [
-        ApiOperation({ summary: '修改博客' })
-      ]
-    },
-    create: {
-      decorators: [
-        ApiOperation({ summary: '新建评论' })
-      ]
-    },
     delete: {
       decorators: [
         ApiOperation({ summary: '删除评论' })
       ]
     },
+    findOne: false,
+    update: false,
+    create: false,
   }
 })
 

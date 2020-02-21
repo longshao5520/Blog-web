@@ -33,9 +33,10 @@
           <el-col :span="2">
             <div class="grid-content bg-purple-light ss">
               <el-dropdown>
-                <i class="el-icon-setting" style="margin-right: 15px"></i>
+                <i class="el-icon-setting"></i>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>编辑</el-dropdown-item>
+                  <el-dropdown-item>修改密码</el-dropdown-item>
+                  <el-dropdown-item>退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
               <span>longshao</span>
@@ -61,14 +62,18 @@ export default class Main extends Vue {
         title: "内容管理",
         icon: "el-icon-tickets",
         items: [
-          { title: "分类管理", icon: "el-icon-document", path: "/cates/list" },
           { title: "文章管理", icon: "el-icon-document", path: "/blogs/ls" },
-          { title: "评论管理", icon: "el-icon-edit", path: "/comments/list" },
+          {
+            title: "分类管理",
+            icon: "el-icon-s-operation",
+            path: "/cates/list"
+          },
           {
             title: "相片管理",
             icon: "el-icon-picture-outline-round",
             path: "/photos/list"
           },
+          { title: "评论管理", icon: "el-icon-edit", path: "/comments/list" },
           { title: "留言管理", icon: "el-icon-tickets", path: "/messages/list" }
         ]
       },
@@ -76,8 +81,7 @@ export default class Main extends Vue {
         title: "运营管理",
         icon: "el-icon-eleme",
         items: [
-          { title: "用户管理", icon: "el-icon-user", path: "/users/list" },
-          { title: "管理员管理", icon: "el-icon-user", path: "/admins/list" }
+          { title: "用户管理", icon: "el-icon-user", path: "/users/list" }
         ]
       }
     ]
@@ -88,5 +92,8 @@ export default class Main extends Vue {
 <style>
 .ss {
   margin-top: 15%;
+}
+.ss i {
+  margin-right: 1rem;
 }
 </style>
