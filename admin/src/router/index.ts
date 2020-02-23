@@ -4,8 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Main from '../views/Main.vue'
 import ResourceCrud from '../views/ResourceCrud.vue'
-import BlogEdit from '../views/blogs/BlogEdit.vue'
-import BlogCrud from '../views/blogs/BlogCrud.vue'
+import BlogCrud from '../views/BlogCrud.vue'
 
 Vue.use(VueRouter)
 
@@ -17,8 +16,6 @@ const routes = [
       { name: 'home', path: '/', redirect: '/blogs/ls', },
       { name: 'crud', path: '/:resource/list', component: ResourceCrud, props: true },
       { name: 'blogs - crud', path: '/blogs/ls', component: BlogCrud, props: true },
-      { name: 'blog - edit', path: '/blogs/edit/:id', component: BlogEdit, props: true },
-      { name: 'blog - create', path: '/blogs/create', component: BlogEdit, props: true },
     ]
   },
   {

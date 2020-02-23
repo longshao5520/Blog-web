@@ -54,32 +54,29 @@ export class BlogsController {
     return {
       index: true,
       stripe: true,
-      addBtn: false,
-      editBtn: false,
+      translate: false,
+      dialogType: 'drawer',
       align: 'center',
       menuAlign: 'center',
+      menuPosition: 'center',
       column: [
         {
           label: '标题',
           prop: 'title',
-          span: 12
+          span: 18
         },
         {
           label: '分类',
           prop: 'cate',
+          type: 'select',
           dicData: cate,
-          span: 4
+          span: 6
         },
-        {
-          label: '标签',
-          prop: 'label',
-          span: 4
-        },
-        {
-          label: '作者',
-          prop: 'author',
-          span: 4
-        },
+        // {
+        //   label: '作者',
+        //   prop: 'author',
+        //   span: 6,
+        // },
         {
           label: '封面',
           prop: 'cover',
@@ -87,65 +84,20 @@ export class BlogsController {
           listType: 'picture-img',
           action: '/upload',
           width: '120',
-          span: 4
+          span: 6
         },
-      ]
-    }
-  }
-  @Get('formOption')
-  async formOption() {
-    const cate = (await this.catesModel.find()).map(v => ({
-      label: v.title,
-      value: v._id
-    }))
-    return {
-      translate: false,
-      labelWidth: 60,
-      emptyText: '返回',
-      group: [
+
         {
-          label: '基本信息',
-          prop: 'group1',
-          column: [{
-            label: '标题',
-            prop: 'title',
-            span: 12
-          },
-          {
-            label: '分类',
-            prop: 'cate',
-            type: 'select',
-            dicData: cate,
-            span: 6
-          },
-          {
-            label: '标签',
-            prop: 'label',
-            span: 6
-          },
-          // {
-          //   label: '作者',
-          //   prop: 'author',
-          //   span: 4
-          // },
-          {
-            label: '封面',
-            prop: 'cover',
-            type: 'upload',
-            listType: 'picture-img',
-            action: '/upload',
-            width: '500'
-          },]
-        }, {
-          label: '内容',
-          prop: 'group2',
-          column: [{
-            hide: true,
-            labelPosition: 'top',
-            prop: 'connect',
-            formslot: true,
-            span: 24
-          }]
+          label: '标签',
+          prop: 'label',
+          span: 6
+        },
+        {
+          hide: true,
+          labelPosition: 'top',
+          prop: 'connect',
+          formslot: true,
+          span: 24
         }
       ]
     }
