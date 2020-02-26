@@ -1,42 +1,42 @@
 import { Controller, Get } from '@nestjs/common';
-import { Cate } from '@libs/db/models/cate.model';
+import { Friend } from '@libs/db/models/friend.model';
 import { Crud } from 'nestjs-mongoose-crud';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 
 @Crud({
-  model: Cate,
+  model: Friend,
   routes: {
     find: {
       decorators: [
-        ApiOperation({ summary: '分类列表' })
+        ApiOperation({ summary: '友链列表' })
       ]
     },
     update: {
       decorators: [
-        ApiOperation({ summary: '编辑分类' })
+        ApiOperation({ summary: '编辑友链' })
       ]
     },
     create: {
       decorators: [
-        ApiOperation({ summary: '新建分类' })
+        ApiOperation({ summary: '新建友链' })
       ]
     },
     delete: {
       decorators: [
-        ApiOperation({ summary: '删除分类' })
+        ApiOperation({ summary: '删除友链' })
       ]
     },
     findOne: false,
   }
 })
 
-@Controller('cates')
-@ApiTags('分类')
-export class CatesController {
+@Controller('friends')
+@ApiTags('友链')
+export class FriendsController {
   constructor(
-    @InjectModel(Cate) private readonly model: ReturnModelType<typeof Cate>,
+    @InjectModel(Friend) private readonly model: ReturnModelType<typeof Friend>,
   ) { }
 
   @Get('option')
@@ -50,19 +50,25 @@ export class CatesController {
       menuAlign: 'center',
       column: [
         {
-          label: '标题',
+          label: '主页标题',
           prop: 'title',
           span: 24
         },
         {
-          label: '封面',
-          prop: 'cover',
-          type: 'upload',
-          listType: 'picture-img',
-          action: '/upload',
-          width: '120',
-          span: 6
-        }
+          label: '描述',
+          prop: 'subtitle',
+          span: 24
+        },
+        {
+          label: '头像',
+          prop: 'img',
+          span: 24
+        },
+        {
+          label: '主页链接',
+          prop: 'link',
+          span: 24
+        },
       ]
     }
   }

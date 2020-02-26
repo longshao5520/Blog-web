@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-img :src="home.cover" height="55vh" position="bottom center">
+    <v-img :src="cate.cover" height="55vh">
       <v-overlay absolute></v-overlay>
     </v-img>
     <Waves :title="title"></Waves>
@@ -19,29 +19,28 @@ export default {
     Waves,
     BlogList
   },
-  async asyncData({ $axios }) {
-    const res = await $axios.$get('home')
-    const data = await $axios.$get('blogs', {
+  async asyncData({ query, $axios }) {
+    const data = await $axios.$get(`cates/${query.id}`)
+    const res = await $axios.$get('blogs', {
       params: {
-        query: { limit: 5, sort: '-_id' }
+        query: { where: { cate: query.id }, sort: '-_id' }
       }
     })
     return {
-      blogs: data.data,
-      home: res.data[0],
+      blogs: res.data,
+      cate: data,
       title: {
-        title: res.data[0].title,
-        subtitle: res.data[0].subtitle
+        title: data.title,
+        subtitle: `该标签下有 ${res.total} 篇文章`
       }
     }
   },
   head() {
     return {
-      title: ''
+      title: `${this.cate.title} - `
     }
   }
 }
 </script>
-
 <style>
 </style>

@@ -1,5 +1,4 @@
 import { prop, modelOptions } from '@typegoose/typegoose'
-import { ApiProperty } from '@nestjs/swagger'
 
 @modelOptions({
   schemaOptions: {
@@ -7,11 +6,9 @@ import { ApiProperty } from '@nestjs/swagger'
   }
 })
 export class Photo {
-  @ApiProperty()
   @prop()
   tpmc: string
 
-  @ApiProperty()
   @prop()
   file: string
 }

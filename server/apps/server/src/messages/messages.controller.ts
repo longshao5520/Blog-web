@@ -8,16 +8,8 @@ import { ReturnModelType } from '@typegoose/typegoose';
 @Crud({
   model: Message,
   routes: {
-    find: {
-      decorators: [
-        ApiOperation({ summary: '留言列表' })
-      ]
-    },
-    create: {
-      decorators: [
-        ApiOperation({ summary: '创建留言' })
-      ]
-    },
+    find: false,
+    create: false,
     findOne: false,
     update: false,
     delete: false,

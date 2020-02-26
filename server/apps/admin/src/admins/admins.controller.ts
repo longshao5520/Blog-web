@@ -8,11 +8,6 @@ import { ReturnModelType } from '@typegoose/typegoose';
 @Crud({
   model: Admin,
   routes: {
-    find: {
-      decorators: [
-        ApiOperation({ summary: '管理员列表' })
-      ]
-    },
     findOne: {
       decorators: [
         ApiOperation({ summary: '管理员详情' })
@@ -23,6 +18,7 @@ import { ReturnModelType } from '@typegoose/typegoose';
         ApiOperation({ summary: '编辑管理员' })
       ]
     },
+    find: false,
     create: false,
     delete: false,
   }

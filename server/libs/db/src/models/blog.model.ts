@@ -1,5 +1,4 @@
 import { prop, modelOptions, Ref } from '@typegoose/typegoose'
-import { ApiProperty } from '@nestjs/swagger'
 import { Cate } from './cate.model'
 
 @modelOptions({
@@ -8,23 +7,18 @@ import { Cate } from './cate.model'
   }
 })
 export class Blog {
-  @ApiProperty()
   @prop()
   title: string
 
-  @ApiProperty()
   @prop()
   label: string
 
-  @ApiProperty()
   @prop()
   connect: string
 
-  @ApiProperty()
   @prop()
   cover: string
 
-  @ApiProperty()
   @prop()
   author: string
 

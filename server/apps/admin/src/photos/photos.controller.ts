@@ -13,11 +13,6 @@ import { ReturnModelType } from '@typegoose/typegoose';
         ApiOperation({ summary: '列表' })
       ]
     },
-    findOne: {
-      decorators: [
-        ApiOperation({ summary: '详情' })
-      ]
-    },
     update: {
       decorators: [
         ApiOperation({ summary: '修改' })
@@ -33,6 +28,7 @@ import { ReturnModelType } from '@typegoose/typegoose';
         ApiOperation({ summary: '删除' })
       ]
     },
+    findOne: false,
   }
 })
 

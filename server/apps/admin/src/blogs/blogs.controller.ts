@@ -56,27 +56,21 @@ export class BlogsController {
       stripe: true,
       translate: false,
       dialogType: 'drawer',
+      dialogWidth: '40%',
       align: 'center',
       menuAlign: 'center',
-      menuPosition: 'center',
+      labelWidth: '60',
       column: [
+        {
+          label: 'ID',
+          prop: '_id',
+          display: false
+        },
         {
           label: '标题',
           prop: 'title',
-          span: 18
+          span: 24
         },
-        {
-          label: '分类',
-          prop: 'cate',
-          type: 'select',
-          dicData: cate,
-          span: 6
-        },
-        // {
-        //   label: '作者',
-        //   prop: 'author',
-        //   span: 6,
-        // },
         {
           label: '封面',
           prop: 'cover',
@@ -84,21 +78,21 @@ export class BlogsController {
           listType: 'picture-img',
           action: '/upload',
           width: '120',
-          span: 6
+          span: 8
         },
-
+        {
+          label: '分类',
+          prop: 'cate',
+          type: 'select',
+          dicData: cate,
+          span: 8
+        },
         {
           label: '标签',
           prop: 'label',
-          span: 6
+          span: 8
         },
-        {
-          hide: true,
-          labelPosition: 'top',
-          prop: 'connect',
-          formslot: true,
-          span: 24
-        }
+
       ]
     }
   }

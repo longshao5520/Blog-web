@@ -1,5 +1,4 @@
 import { prop, modelOptions, Ref } from '@typegoose/typegoose'
-import { ApiProperty } from '@nestjs/swagger'
 import { User } from './user.model'
 import { Blog } from './blog.model'
 
@@ -9,7 +8,6 @@ import { Blog } from './blog.model'
   }
 })
 export class Comment {
-  @ApiProperty()
   @prop()
   connect: string
 

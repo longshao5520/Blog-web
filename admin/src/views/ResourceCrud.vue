@@ -30,7 +30,9 @@ export default class ResourceList extends Vue {
     pageSizes: [5, 10],
     total: 10
   };
-  query: any = {};
+  query: any = {
+    sort: "-_id"
+  };
 
   async fetchOption() {
     const res = await this.$http.get(`${this.resource}/option`);

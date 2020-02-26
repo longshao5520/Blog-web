@@ -1,0 +1,26 @@
+.md {
+  color: aliceblue !important;
+  z-index: 0 !important;
+
+  code {
+    color: rgb(0, 0, 0) !important;
+    box-shadow: none !important;
+    background-color: #a7a7a7 !important;
+    /* background-color: #263238 !important; */
+  }
+  pre {
+    background-color: #a7a7a7 !important;
+  }
+
+  pre > code {
+    background-color: #a7a7a7 !important;
+  }
+
+  div {
+    background-color: #353b48 !important;
+  }
+  blockquote {
+    color: #cfcfcf !important;
+    background-color: #5b5b5b !important;
+  }
+}

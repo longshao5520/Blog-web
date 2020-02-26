@@ -1,42 +1,24 @@
 import { Controller, Get } from '@nestjs/common';
-import { Cate } from '@libs/db/models/cate.model';
+import { Home } from '@libs/db/models/home.model';
 import { Crud } from 'nestjs-mongoose-crud';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 
 @Crud({
-  model: Cate,
+  model: Home,
   routes: {
-    find: {
-      decorators: [
-        ApiOperation({ summary: '分类列表' })
-      ]
-    },
-    update: {
-      decorators: [
-        ApiOperation({ summary: '编辑分类' })
-      ]
-    },
-    create: {
-      decorators: [
-        ApiOperation({ summary: '新建分类' })
-      ]
-    },
-    delete: {
-      decorators: [
-        ApiOperation({ summary: '删除分类' })
-      ]
-    },
     findOne: false,
+    create: false,
+    delete: false,
   }
 })
 
-@Controller('cates')
-@ApiTags('分类')
-export class CatesController {
+@Controller('home')
+@ApiTags('Home')
+export class HomeController {
   constructor(
-    @InjectModel(Cate) private readonly model: ReturnModelType<typeof Cate>,
+    @InjectModel(Home) private readonly model: ReturnModelType<typeof Home>,
   ) { }
 
   @Get('option')
@@ -44,6 +26,8 @@ export class CatesController {
     return {
       index: true,
       stripe: true,
+      addBtn: false,
+      delBtn: false,
       dialogType: 'drawer',
       dialogWidth: '30%',
       align: 'center',
@@ -55,6 +39,16 @@ export class CatesController {
           span: 24
         },
         {
+          label: '描述',
+          prop: 'subtitle',
+          span: 24
+        },
+        {
+          label: '头像',
+          prop: 'img',
+          span: 24
+        },
+        {
           label: '封面',
           prop: 'cover',
           type: 'upload',
@@ -62,7 +56,7 @@ export class CatesController {
           action: '/upload',
           width: '120',
           span: 6
-        }
+        },
       ]
     }
   }

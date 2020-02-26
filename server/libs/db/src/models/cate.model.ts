@@ -1,5 +1,4 @@
 import { prop, modelOptions } from '@typegoose/typegoose'
-import { ApiProperty } from '@nestjs/swagger'
 
 @modelOptions({
   schemaOptions: {
@@ -7,7 +6,9 @@ import { ApiProperty } from '@nestjs/swagger'
   }
 })
 export class Cate {
-  @ApiProperty()
   @prop()
   title: string
+
+  @prop()
+  cover: string
 }

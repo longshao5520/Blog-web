@@ -27,7 +27,7 @@
         <el-row>
           <el-col :span="22">
             <div class="grid-content bg-purple-light">
-              <h2>微薄的青春ゝ - 博客后台管理</h2>
+              <h2>博客管理后台</h2>
             </div>
           </el-col>
           <el-col :span="2">
@@ -59,29 +59,42 @@ export default class Main extends Vue {
   menu = {
     items: [
       {
+        title: "Home",
+        icon: "el-icon-s-home",
+        items: [
+          { title: "Home", icon: "el-icon-s-home", path: "/home/list" },
+          { title: "友链管理", icon: "el-icon-link", path: "/friends/list" }
+        ]
+      },
+      {
         title: "内容管理",
         icon: "el-icon-tickets",
         items: [
-          { title: "文章管理", icon: "el-icon-document", path: "/blogs/ls" },
           {
             title: "分类管理",
             icon: "el-icon-s-operation",
             path: "/cates/list"
           },
+          { title: "文章管理", icon: "el-icon-document", path: "/blogs/list" },
+          { title: "文章内容", icon: "el-icon-document", path: "/blogs/edit" },
           {
             title: "相片管理",
             icon: "el-icon-picture-outline-round",
             path: "/photos/list"
-          },
-          { title: "评论管理", icon: "el-icon-edit", path: "/comments/list" },
-          { title: "留言管理", icon: "el-icon-tickets", path: "/messages/list" }
+          }
         ]
       },
       {
         title: "运营管理",
         icon: "el-icon-eleme",
         items: [
-          { title: "用户管理", icon: "el-icon-user", path: "/users/list" }
+          { title: "用户管理", icon: "el-icon-user", path: "/users/list" },
+          { title: "评论管理", icon: "el-icon-edit", path: "/comments/list" },
+          {
+            title: "留言管理",
+            icon: "el-icon-tickets",
+            path: "/messages/list"
+          }
         ]
       }
     ]

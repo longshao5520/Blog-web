@@ -10,6 +10,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { AdminsModule } from './admins/admins.module';
 import { CatesModule } from './cates/cates.module';
 import { CommonModule } from 'libs/common/src';
+import { FriendsModule } from './friends/friends.module';
+import { HomeModule } from './home/home.module';
 const MAO = require('multer-aliyun-oss');
 
 @Module({
@@ -29,6 +31,7 @@ const MAO = require('multer-aliyun-oss');
         }
       }
     }),
+    HomeModule,
     CatesModule,
     BlogsModule,
     PhotosModule,
@@ -36,6 +39,7 @@ const MAO = require('multer-aliyun-oss');
     MessagesModule,
     UsersModule,
     AdminsModule,
+    FriendsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

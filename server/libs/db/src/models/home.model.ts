@@ -5,10 +5,16 @@ import { prop, modelOptions } from '@typegoose/typegoose'
     timestamps: true
   }
 })
-export class User {
+export class Home {
   @prop()
-  username: string
+  title: string
 
   @prop()
-  password: string
+  subtitle: string
+
+  @prop()
+  img: string
+
+  @prop()
+  cover: string
 }

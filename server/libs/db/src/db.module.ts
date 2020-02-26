@@ -8,6 +8,8 @@ import { Comment } from './models/comment.model'
 import { Message } from './models/message.model'
 import { Admin } from './models/admin.model'
 import { Cate } from './models/cate.model';
+import { Friend } from './models/friend.model';
+import { Home } from './models/home.model';
 
 
 const models = TypegooseModule.forFeature([
@@ -17,7 +19,9 @@ const models = TypegooseModule.forFeature([
   Comment,
   Photo,
   Message,
-  Admin
+  Admin,
+  Friend,
+  Home
 ])
 
 @Global()

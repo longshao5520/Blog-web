@@ -3,7 +3,7 @@ require('dotenv').config()
 export default {
   mode: 'universal',
   head: {
-    titleTemplate: '%s - 微薄の青春',
+    titleTemplate: '%s微薄の青春',
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -13,11 +13,23 @@ export default {
     link: [
       { rel: 'icon', href: 'http://img.yql520.com/blog_public/img/%E5%A4%B4%E5%83%8F.png' },
       { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.11.2/css/all.css' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css' },
+    ],
+    script: [
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js' },
+      { src: 'https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js' }
     ]
   },
   loading: { color: '#fff' },
-  css: [],
-  plugins: [],
+  css: [
+    "mavon-editor/dist/css/index.css",
+    '~/assets/variables.scss',
+    '~/static/md.scss'
+  ],
+  script: ['~/static/ap.js'],
+  plugins: [
+    { src: '~/plugins/vue-markdown.js', srr: false }
+  ],
   buildModules: [
     '@nuxtjs/vuetify',
   ],
@@ -25,10 +37,11 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
+    '@nuxtjs/proxy'
   ],
   axios: {},
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    // customVariables: [],
     theme: {
       dark: true,
       themes: {
