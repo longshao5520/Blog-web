@@ -36,6 +36,7 @@ export class HomeController {
         {
           label: '标题',
           prop: 'title',
+          width: 200,
           span: 24
         },
         {
@@ -54,7 +55,7 @@ export class HomeController {
           type: 'upload',
           listType: 'picture-img',
           action: '/upload',
-          width: '120',
+          width: 200,
           span: 6
         },
       ]

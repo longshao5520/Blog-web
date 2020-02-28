@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer color="#263238" v-model="drawer" clipped right app>
+    <v-navigation-drawer color="#263238" v-model="drawer" disable-resize-watcher clipped right app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
@@ -12,39 +12,32 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="#263238" clipped-right dense fixed app>
-      <v-spacer class="d-sm-none" />
-      <v-list-item two-line>
-        <v-list-item-avatar width="40" height="40">
-          <img :src="Lhome.img" />
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title class="title">{{Lhome.title}}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-spacer />
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+    <v-app-bar color="#263238" clipped-right dense app>
+      <img :src="Lhome.img" width="40" height="40" class="mr-2 ml-2" />
+      <div class="mt-1 ttt">
+        <span>{{Lhome.title}}</span>
+      </div>
+      <v-layout column justify-center align-center>
+        <v-tabs class="toggle" background-color="#263238" color="#fff" centered right>
+          <v-tab optional v-for="(item, i) in items" :key="i" :to="item.to">{{item.title}}</v-tab>
+        </v-tabs>
+      </v-layout>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-sm-none" />
     </v-app-bar>
   </div>
 </template>
 
 <script>
-// rgba(255, 0, 0, 0.5)
 export default {
   data() {
     return {
-      drawer: null,
+      drawer: false,
       Lhome: {},
       cates: [],
       items: []
     }
   },
   mounted() {
-    this.drawer = null
-    setTimeout(() => {
-      this.drawer = false
-    }, 1000)
-    this.drawer = null
     this.home()
   },
   methods: {
@@ -76,3 +69,15 @@ export default {
   }
 }
 </script>
+
+<style>
+.ttt {
+  height: 48px;
+  line-height: 48px;
+}
+@media only screen and (max-width: 600px) {
+  .toggle {
+    display: none;
+  }
+}
+</style>

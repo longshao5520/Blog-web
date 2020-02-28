@@ -23,11 +23,11 @@ export default {
     const res = await $axios.$get('home')
     const data = await $axios.$get('blogs', {
       params: {
-        query: { limit: 5, sort: '-_id' }
+        query: { sort: '-_id' }
       }
     })
     return {
-      blogs: data.data,
+      blogs: data,
       home: res.data[0],
       title: {
         title: res.data[0].title,

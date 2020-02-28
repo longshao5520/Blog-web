@@ -27,7 +27,7 @@ export default {
       }
     })
     return {
-      blogs: res.data,
+      blogs: res,
       cate: data,
       title: {
         title: data.title,

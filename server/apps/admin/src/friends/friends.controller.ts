@@ -52,6 +52,7 @@ export class FriendsController {
         {
           label: '主页标题',
           prop: 'title',
+          width: 200,
           span: 24
         },
         {

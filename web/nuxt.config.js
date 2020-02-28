@@ -13,20 +13,18 @@ export default {
     link: [
       { rel: 'icon', href: 'http://img.yql520.com/blog_public/img/%E5%A4%B4%E5%83%8F.png' },
       { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.11.2/css/all.css' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css', srr: false },
     ],
     script: [
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js' },
-      { src: 'https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js' }
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js', srr: false },
+      { src: 'https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js', srr: false }
     ]
   },
-  loading: { color: '#fff' },
+  loading: { color: '#263238' },
   css: [
     "mavon-editor/dist/css/index.css",
-    '~/assets/variables.scss',
     '~/static/md.scss'
   ],
-  script: ['~/static/ap.js'],
   plugins: [
     { src: '~/plugins/vue-markdown.js', srr: false }
   ],
@@ -41,7 +39,7 @@ export default {
   ],
   axios: {},
   vuetify: {
-    // customVariables: [],
+    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
       themes: {

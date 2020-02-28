@@ -64,6 +64,7 @@ export class BlogsController {
         {
           label: 'ID',
           prop: '_id',
+          width: 300,
           display: false
         },
         {
@@ -77,7 +78,7 @@ export class BlogsController {
           type: 'upload',
           listType: 'picture-img',
           action: '/upload',
-          width: '120',
+          width: 150,
           span: 8
         },
         {
@@ -85,11 +86,13 @@ export class BlogsController {
           prop: 'cate',
           type: 'select',
           dicData: cate,
+          width: 150,
           span: 8
         },
         {
           label: '标签',
           prop: 'label',
+          width: 150,
           span: 8
         },
 

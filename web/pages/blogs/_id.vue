@@ -21,7 +21,6 @@
             </client-only>
           </v-col>
         </v-row>
-        <client-only></client-only>
       </v-layout>
     </v-container>
   </div>
