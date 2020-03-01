@@ -1,4 +1,7 @@
-import { prop, modelOptions } from '@typegoose/typegoose'
+import { prop, modelOptions, DocumentType } from '@typegoose/typegoose'
+import { hashSync } from 'bcryptjs'
+
+export type UserDocument = DocumentType<User>
 
 @modelOptions({
   schemaOptions: {
@@ -9,6 +12,14 @@ export class User {
   @prop()
   username: string
 
-  @prop()
+  @prop({
+    select: false,
+    get(val) {
+      return val
+    },
+    set(val) {
+      return val && hashSync(val)
+    }
+  })
   password: string
 }

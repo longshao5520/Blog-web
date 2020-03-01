@@ -8,6 +8,7 @@ import { MessagesModule } from './messages/messages.module';
 import { CatesModule } from './cates/cates.module';
 import { FriendsModule } from './friends/friends.module';
 import { HomeModule } from './home/home.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { HomeModule } from './home/home.module';
     FriendsModule,
     PhotosModule,
     MessagesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

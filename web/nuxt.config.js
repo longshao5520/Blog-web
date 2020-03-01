@@ -33,11 +33,24 @@ export default {
   ],
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    '@nuxtjs/auth',
+    // '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    '@nuxtjs/proxy'
   ],
   axios: {},
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login' },
+          logout: { url: '/auth/logout' },
+          user: { url: '/auth/user', propertyName: false }
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+      }
+    }
+  },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {

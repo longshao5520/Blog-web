@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('视频网站 - 前端API')
     .setDescription('供前端界面调用的服务端API')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);

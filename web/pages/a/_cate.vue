@@ -5,7 +5,13 @@
     </v-img>
     <Waves :title="title"></Waves>
     <v-container>
-      <BlogList :blogs="blogs"></BlogList>
+      <BlogList
+        :blogs="blogs"
+        :blog="blog"
+        :isPagination="isPagination"
+        :page="page"
+        :rowsPerPage="rowsPerPage"
+      ></BlogList>
     </v-container>
   </div>
 </template>
@@ -26,13 +32,34 @@ export default {
         query: { where: { cate: query.id }, sort: '-_id' }
       }
     })
+    let blog = []
+    let isPagination = false
+    let page = 1
+    let rowsPerPage = 5
+    if (Math.ceil(res.total / 5) > 1) {
+      isPagination = true
+      if (page == 1) {
+        blog = []
+        for (let i = 0; i < rowsPerPage; i++) {
+          blog.push(res.data[i])
+        }
+      }
+    } else {
+      for (let i in res.data) {
+        blog.push(res.data[i])
+      }
+    }
     return {
       blogs: res,
       cate: data,
       title: {
         title: data.title,
         subtitle: `该标签下有 ${res.total} 篇文章`
-      }
+      },
+      blog,
+      isPagination,
+      page,
+      rowsPerPage
     }
   },
   head() {

@@ -39,32 +39,12 @@
 import moment from 'moment'
 export default {
   props: {
+    page: Number,
+    rowsPerPage: Number,
+    isPagination: false,
     blogs: {},
+    blog: Array,
     data() {}
-  },
-  data() {
-    return {
-      page: 1,
-      rowsPerPage: 5,
-      totalItems: this.blogs.total,
-      blog: [],
-      isPagination: false
-    }
-  },
-  mounted() {
-    if (Math.ceil(this.blogs.total / 5) > 1) {
-      this.isPagination = true
-      if (this.page == 1) {
-        this.blog = []
-        for (let i = 0; i < this.rowsPerPage; i++) {
-          this.blog.push(this.blogs.data[i])
-        }
-      }
-    } else {
-      for (let i in this.blogs.data) {
-        this.blog.push(this.blogs.data[i])
-      }
-    }
   },
   methods: {
     loadData() {
@@ -86,12 +66,20 @@ export default {
         this.blog = []
         for (
           let i = Math.ceil((this.page - 1) * this.rowsPerPage);
-          i < this.totalItems;
+          i < this.blogs.total;
           i++
         ) {
           this.blog.push(this.blogs.data[i])
         }
       }
+      let back = setInterval(() => {
+        if (document.documentElement.scrollTop || document.body.scrollTop) {
+          document.documentElement.scrollTop -= 50
+          document.body.scrollTop -= 50
+        } else {
+          clearInterval(back)
+        }
+      }, 20)
     },
     dataFormat(dataStr, pattern) {
       return moment(dataStr).format(pattern)
@@ -99,6 +87,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

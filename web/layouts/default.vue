@@ -17,6 +17,7 @@ import BackTop from '~/components/BackTop'
 import APlayer from '~/components/APlayer'
 
 export default {
+  loading: false,
   components: {
     Navbar,
     Bottom,
