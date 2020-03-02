@@ -9,7 +9,7 @@
         theme="#2980b9"
         mini="true"
         fixed="true"
-        autoplay="true"
+        autoplay="false"
         order="random"
       ></meting-js>
     </div>

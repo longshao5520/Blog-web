@@ -30,17 +30,16 @@
     </v-navigation-drawer>
     <v-app-bar color="#263238" clipped-right dense app>
       <img :src="Lhome.img" width="40" height="40" class="mr-2 ml-2" />
-      <div class="mt-1 ttt">
+      <div class="mt-1">
         <span>{{Lhome.title}}</span>
       </div>
       <v-layout column justify-center align-center>
         <v-tabs class="toggle" background-color="#263238" color="#fff" centered right>
-          <v-tab optional v-for="(item, i) in items" :key="i" :to="item.to">{{item.title}}</v-tab>
+          <v-tab v-for="(item, i) in items" :key="i" :to="item.to">{{item.title}}</v-tab>
           <v-tab v-if="$store.state.auth.user">欢迎你，{{$store.state.auth.user.username}}</v-tab>
           <v-btn v-else @click="isShowLoginForm = true" text icon style="margin-right: 0;">
-            <v-icon dense>fas fa-user-lock</v-icon>
+            <v-icon small>fas fa-user-lock</v-icon>
           </v-btn>
-          <!-- <v-tab  >登录</v-tab> -->
         </v-tabs>
       </v-layout>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="d-sm-none" />
@@ -112,10 +111,6 @@ export default {
 </script>
 
 <style>
-.ttt {
-  height: 48px;
-  line-height: 48px;
-}
 @media only screen and (max-width: 600px) {
   .toggle {
     display: none;
