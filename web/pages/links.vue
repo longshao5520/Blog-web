@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-01 15:58:43
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\web\pages\links.vue
+--> 
 <template>
   <v-container>
     <div style="max-width: 1200px; margin: 0 auto;">
@@ -35,24 +43,6 @@ export default {
     const res = await $axios.$get('friends')
     return {
       links: res.data
-    }
-  },
-  data() {
-    return {
-      items: [
-        {
-          img: 'https://lllxy.oss-cn-shenzhen.aliyuncs.com/coreHome/user.jpg',
-          title: 'LLLXY',
-          subtitle: '.Net Developer',
-          link: 'https://lllxy.net/'
-        },
-        {
-          img: 'https://www.ccczg.site/images/anthony.jpg',
-          title: 'CCCZG',
-          subtitle: 'Java Developer',
-          link: 'https://www.ccczg.site/'
-        }
-      ]
     }
   },
   head() {
