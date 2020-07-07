@@ -1,7 +1,15 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-07 14:23:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\web\components\BackTop.vue
+--> 
 <template>
   <div class="test-box">
     <div class="scrollTop" v-show="showTop" @click="gotop">
-      <v-icon color="#40739e" large>fas fa-caret-up</v-icon>
+      <v-icon color="#666" large>fas fa-caret-up</v-icon>
     </div>
   </div>
 </template>
@@ -47,7 +55,7 @@ export default {
   position: fixed;
   right: 5%;
   bottom: 10%;
-  background-color: #afafaf;
+  background-color: #e4e5e6;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;

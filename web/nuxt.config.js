@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-07 09:55:28
+ * @LastEditTime: 2020-07-07 17:36:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -11,7 +11,7 @@ require('dotenv').config()
 export default {
   mode: 'universal',
   head: {
-    titleTemplate: '%s微薄の青春',
+    titleTemplate: '%s龙少5520',
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -46,7 +46,7 @@ export default {
     '@nuxtjs/auth',
     // '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    'bootstrap-vue/nuxt'
+    // 'bootstrap-vue/nuxt'
   ],
   axios: {},
   auth: {
@@ -65,7 +65,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,

@@ -1,9 +1,20 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-07 17:40:50
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\web\pages\a\_cate.vue
+--> 
 <template>
   <div>
-    <v-img :src="cate.cover" height="55vh">
-      <v-overlay absolute></v-overlay>
-    </v-img>
-    <Waves :title="title"></Waves>
+    <Navbar :items="items" :Lhome="home"></Navbar>
+    <div class="headTitle">
+      <div>
+        <h1>{{title.title}}</h1>
+        <span>{{title.subtitle}}</span>
+      </div>
+    </div>
     <v-container>
       <BlogList
         :blogs="blogs"
@@ -13,19 +24,23 @@
         :rowsPerPage="rowsPerPage"
       ></BlogList>
     </v-container>
+    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
-import Waves from '~/components/Waves'
+import Navbar from '~/components/Navbar-vf'
+import Bottom from '~/components/Bottom'
 import BlogList from '~/components/BlogList'
 
 export default {
   components: {
-    Waves,
-    BlogList
+    Navbar,
+    BlogList,
+    Bottom
   },
   async asyncData({ query, $axios }) {
+    const home = await $axios.$get('home')
     const data = await $axios.$get(`cates/${query.id}`)
     const res = await $axios.$get('blogs', {
       params: {
@@ -49,7 +64,28 @@ export default {
         blog.push(res.data[i])
       }
     }
+    const cates = await $axios.$get(`cates`)
+    let items = [
+      { icon: 'fas fa-home', title: '首页', to: '/' },
+      {
+        icon: 'fas fa-code',
+        title: '编程技术',
+        to: `/a/code?id=5e4db4f8ad98430d6087d096`
+      },
+      {
+        icon: 'fas fa-terminal',
+        title: '奇巧淫技',
+        to: `/a/terminal?id=5e5334f0fece3a2c84d3aa4a`
+      },
+      {
+        icon: 'fas fa-coffee',
+        title: '随便写写',
+        to: `/a/coffee?id=5e4db1523f05360c96dde820`
+      },
+      { icon: 'fas fa-comments', title: '友链', to: '/links' }
+    ]
     return {
+      items,
       blogs: res,
       cate: data,
       title: {
@@ -59,7 +95,8 @@ export default {
       blog,
       isPagination,
       page,
-      rowsPerPage
+      rowsPerPage,
+      home: home.data[0]
     }
   },
   head() {
