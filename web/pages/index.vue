@@ -1,6 +1,14 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-02 23:18:49
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
+--> 
 <template>
-  <div>
-    <v-img :src="home.cover" height="55vh" position="bottom center">
+  <div class="ddd">
+    <v-img :src="home.cover" height="55vh" position="bottom center" class="Ber">
       <v-overlay absolute></v-overlay>
     </v-img>
     <Waves :title="title"></Waves>
@@ -70,3 +78,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.ddd{
+  margin-top: -66px;
+}
+</style>

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-07 09:55:28
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
+ */ 
 import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 export default {
@@ -17,7 +25,8 @@ export default {
     ],
     script: [
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js', srr: false },
-      { src: 'https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js', srr: false }
+      { src: 'https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js', srr: false },
+      { scr: 'https://hm.baidu.com/hm.js?1a20acd14ce73e920b167299d8d31bbc'}
     ]
   },
   loading: { color: '#263238' },
@@ -26,7 +35,8 @@ export default {
     '~/static/md.scss'
   ],
   plugins: [
-    { src: '~/plugins/vue-markdown.js', srr: false }
+    { src: '~/plugins/vue-markdown.js', srr: false },
+    { src: '~/plugins/baidu.js'}
   ],
   buildModules: [
     '@nuxtjs/vuetify',
@@ -36,6 +46,7 @@ export default {
     '@nuxtjs/auth',
     // '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
+    'bootstrap-vue/nuxt'
   ],
   axios: {},
   auth: {
