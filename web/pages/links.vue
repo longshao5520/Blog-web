@@ -1,14 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-07 17:39:35
+ * @LastEditTime: 2020-07-08 15:14:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\links.vue
 -->
 <template>
   <div>
-    <Navbar :items="items" :Lhome="home"></Navbar>
     <v-container  style="margin-top: 45px;">
       <div style="max-width: 1200px; margin: 0 auto;">
         <h3 class="ma-5">My friends</h3>
@@ -40,45 +39,15 @@
         </v-row>
       </div>
     </v-container>
-    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
-import Navbar from '~/components/Navbar-vf'
-import Bottom from '~/components/Bottom'
 export default {
-  components: {
-    Navbar,
-    Bottom
-  },
   async asyncData({ $axios }) {
-    const res = await $axios.$get('friends')
-    const home = await $axios.$get('home')
-    const cates = await $axios.$get(`cates`)
-    let items = [
-      { icon: 'fas fa-home', title: '首页', to: '/' },
-      {
-        icon: 'fas fa-code',
-        title: '编程技术',
-        to: `/a/code?id=5e4db4f8ad98430d6087d096`
-      },
-      {
-        icon: 'fas fa-terminal',
-        title: '奇巧淫技',
-        to: `/a/terminal?id=5e5334f0fece3a2c84d3aa4a`
-      },
-      {
-        icon: 'fas fa-coffee',
-        title: '随便写写',
-        to: `/a/coffee?id=5e4db1523f05360c96dde820`
-      },
-      { icon: 'fas fa-comments', title: '友链', to: '/links' }
-    ]
+    const links = await $axios.$get('friends')
     return {
-      items,
-      links: res.data,
-      home: home.data[0]
+      links: links.data,
     }
   },
   head() {

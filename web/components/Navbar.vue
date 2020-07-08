@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-07-02 22:35:50
+ * @LastEditTime: 2020-07-08 16:05:20
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\web\components\Navbar.vue
+--> 
 <template>
   <div>
     <v-navigation-drawer v-model="drawer" fixed app>
@@ -15,7 +23,7 @@
       </template>
 
       <v-divider></v-divider>
-      
+
       <v-list shaped>
         <v-list-item
           v-for="(item, i) in items"
@@ -33,29 +41,20 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar dense absolute color="#fff">
+    <v-app-bar dense absolute clipped-left color="#fff">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-layout column justify-center align-center>
-        <v-tabs centered right>
-          <v-tab v-if="$store.state.auth.user"
-            >欢迎你，{{ $store.state.auth.user.username }}</v-tab
-          >
-          <v-btn
-            v-else
-            @click="isShowLoginForm = true"
-            text
-            icon
-            style="margin-right: 0;"
-          >
-            <v-icon small>fas fa-user-lock</v-icon>
-          </v-btn>
-        </v-tabs>
-      </v-layout>
+      <v-spacer></v-spacer>
+      <v-toolbar-title v-if="$store.state.auth.user"
+        >欢迎你，{{ $store.state.auth.user.username }}</v-toolbar-title
+      >
+      <v-btn v-else @click="isShowLoginForm = true" icon>
+        <v-icon>fas fa-user-lock</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-dialog v-model="isShowLoginForm" max-width="400px">
       <v-form @submit.prevent="login">
-        <v-card class="pa-3" color="rgba(255,255,255,1)">
+        <v-card class="pa-3" color="#fff">
           <v-card-title>
             <span class="headline">用户登录</span>
           </v-card-title>
@@ -87,15 +86,22 @@
 export default {
   props: {
     items: Array,
-    Lhome:{},
+    Lhome: {}
   },
   data: () => ({
     isShowLoginForm: false,
     loginModel: {},
-    drawer: true,
+    drawer: true
   }),
+  methods: {
+    async login() {
+      await this.$auth.loginWith('local', {
+        data: this.loginModel
+      })
+      this.isShowLoginForm = false
+    }
+  }
 }
 </script>
 
-<style>
-</style>
+<style></style>

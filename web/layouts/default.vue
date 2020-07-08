@@ -1,36 +1,63 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-07 17:47:20
+ * @LastEditTime: 2020-07-08 16:44:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\layouts\default.vue
 -->
 <template>
   <v-app>
+    <Navbar :items="items" :Lhome="Lhome"></Navbar>
     <v-content style="background-color: #F1F3F4;">
       <nuxt />
+      <Bottom></Bottom>
     </v-content>
     <BackTop></BackTop>
-    <!-- <APlayer></APlayer> -->
+    <APlayer></APlayer>
   </v-app>
 </template>
 
 <script>
-// import Navbar from '~/components/Navbar-vf'
-// import Bottom from '~/components/Bottom'
+import Navbar from '~/components/Navbar'
+import Bottom from '~/components/Bottom'
 import BackTop from '~/components/BackTop'
 import APlayer from '~/components/APlayer'
-
-import { mapState, mapMutations } from 'vuex'
 
 export default {
   loading: false,
   components: {
-    // Navbar,
-    // Bottom,
+    Navbar,
+    Bottom,
     BackTop,
-    APlayer
+    APlayer,
+  },
+  data: () => ({
+    items: [
+      { icon: 'fas fa-home', title: '首页', to: '/' },
+      {
+        icon: 'fas fa-code',
+        title: '编程技术',
+        to: `/a/code?id=5e4db4f8ad98430d6087d096`
+      },
+      {
+        icon: 'fas fa-terminal',
+        title: '奇巧淫技',
+        to: `/a/terminal?id=5e5334f0fece3a2c84d3aa4a`
+      },
+      {
+        icon: 'fas fa-coffee',
+        title: '随便写写',
+        to: `/a/coffee?id=5e4db1523f05360c96dde820`
+      },
+      { icon: 'fas fa-comments', title: '留言板', to: '/messages' },
+      { icon: 'fas fa-people-carry', title: '友链', to: '/links' }
+    ],
+    Lhome: {}
+  }),
+  async mounted() {
+    const home = await this.$axios.$get('home')
+    this.Lhome = home.data[0]
   },
 }
 </script>
@@ -40,10 +67,6 @@ export default {
 ::after {
   text-decoration: none;
 }
-/* body{
-  width: 80vw;
-  margin: 0 auto;
-} */
 body::-webkit-scrollbar {
   width: 6px;
 }
@@ -52,6 +75,5 @@ body::-webkit-scrollbar-thumb {
 }
 body::-webkit-scrollbar-track {
   background: black;
-  
 }</style
 >>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-07 17:36:54
+ * @LastEditTime: 2020-07-08 14:39:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -11,8 +11,10 @@ require('dotenv').config()
 export default {
   mode: 'universal',
   head: {
-    titleTemplate: '%s龙少5520',
-    title: process.env.npm_package_name || '',
+    // titleTemplate: '%s龙少5520',
+    titleTemplate: `%s${process.env.APP_NAME}`,
+    // title: process.env.npm_package_name || '',
+    title: `%s${process.env.APP_NAME}` || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -45,7 +47,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     // '@nuxtjs/pwa',
-    '@nuxtjs/dotenv',
+    ['@nuxtjs/dotenv', { only: ['some_key'] }],
     // 'bootstrap-vue/nuxt'
   ],
   axios: {},
