@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-08 16:42:53
+ * @LastEditTime: 2020-07-09 14:24:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BlogList.vue
 -->
 <template>
-  <v-layout column justify-center align-center class="mt-12">
+  <v-layout column justify-center align-center class="mt-12 mb-10">
     <v-card
       v-for="(item, index) in blog"
       :key="item._id"
@@ -44,7 +44,7 @@
       total-visible="5"
       circle
       color="#666"
-      class="mt-2 mb-10"
+      class="mt-2"
     ></v-pagination>
   </v-layout>
 </template>
@@ -60,12 +60,8 @@ export default {
     blog: Array,
     data() {}
   },
-  // data:() => ({
-  //   page: 0,
-  // }),
   methods: {
     loadData() {
-      // this.page = this.pages;
       if (this.page == 1) {
         this.blog = []
         for (let i = 0; i < this.rowsPerPage; i++) {
@@ -106,9 +102,4 @@ export default {
 }
 </script>
 
-<style>
-.bloglist {
-  margin-top: 45px;
-  /* margin-bottom: 2rem; */
-}
-</style>
+<style></style>
