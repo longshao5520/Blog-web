@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-08 15:01:43
+ * @LastEditTime: 2020-07-09 15:22:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\blogs\_id.vue
@@ -45,13 +45,13 @@ export default {
     let toItems = [
       {
         text: '首页',
-        disabled: false,
+        disabled: true,
         href: '/'
       },
       {
         text: cate.title,
-        disabled: false,
-        href: `/a/code?id=${cate._id}`
+        disabled: true,
+        href: `/cates/${cate._id}`
       },
       {
         text: blog.title,

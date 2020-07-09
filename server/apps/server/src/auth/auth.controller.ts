@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-09 16:37:51
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\server\apps\server\src\auth\auth.controller.ts
+ */ 
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { InjectModel } from 'nestjs-typegoose';
@@ -40,5 +48,10 @@ export class AuthController {
   @ApiBearerAuth()
   async user(@CurrentUser() user: UserDocument) {
     return user
+  }
+  @Get('logout')
+  @ApiOperation({ summary: '退出登录' })
+  async logout() {
+    return '退出成功'
   }
 }

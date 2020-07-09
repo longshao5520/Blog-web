@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-08 14:39:47
+ * @LastEditTime: 2020-07-09 16:36:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -56,7 +56,7 @@ export default {
       local: {
         endpoints: {
           login: { url: '/auth/login' },
-          logout: { url: '/auth/logout' },
+          logout: { url: '/auth/logout', method: 'get' },
           user: { url: '/auth/user', propertyName: false }
         },
         // tokenRequired: true,

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-08 16:44:38
+ * @LastEditTime: 2020-07-09 15:15:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\a\_cate.vue
@@ -30,11 +30,11 @@ export default {
     Title,
     BlogList,
   },
-  async asyncData({ query, $axios }) {
-    const cate = await $axios.$get(`cates/${query.id}`)
+  async asyncData({ params, $axios }) {
+    const cate = await $axios.$get(`cates/${params.id}`)
     const blogs = await $axios.$get('blogs', {
       params: {
-        query: { where: { cate: query.id }, sort: '-_id' }
+        query: { where: { cate: params.id }, sort: '-_id' }
       }
     })
     let blog = []

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-02 22:35:50
- * @LastEditTime: 2020-07-08 16:05:20
+ * @LastEditTime: 2020-07-09 16:37:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\Navbar.vue
@@ -43,11 +43,15 @@
     </v-navigation-drawer>
     <v-app-bar dense absolute clipped-left color="#fff">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title v-if="$store.state.auth.user">
+        欢迎你，{{ $store.state.auth.user.username }}
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title v-if="$store.state.auth.user"
-        >欢迎你，{{ $store.state.auth.user.username }}</v-toolbar-title
-      >
-      <v-btn v-else @click="isShowLoginForm = true" icon>
+      <v-btn v-if="$store.state.auth.user" @click="logOut" text class="ml-3">
+        <v-icon dense class="mt-1 mr-1">fas fa-power-off</v-icon>
+        安全退出
+      </v-btn>
+      <v-btn v-if="!$store.state.auth.user" @click="isShowLoginForm = true" icon>
         <v-icon>fas fa-user-lock</v-icon>
       </v-btn>
     </v-app-bar>
@@ -99,6 +103,9 @@ export default {
         data: this.loginModel
       })
       this.isShowLoginForm = false
+    },
+    logOut() {
+      this.$auth.logout();
     }
   }
 }
