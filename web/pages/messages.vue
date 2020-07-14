@@ -1,64 +1,55 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-14 14:35:05
+ * @LastEditTime: 2020-07-14 18:46:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
 -->
 <template>
-  <div>
-    <v-container class="mt-1 mb-8">
-      <v-layout column align-center>
-        <v-card
-          outlined
-          color="rgba(255, 0, 0, 0)"
-          class="mt-2 mb-2"
-          width="800"
-        >
-          <v-form @submit.prevent="addMessage" class="textarea">
-            <v-textarea
-              outlined
-              no-resize
-              counter="100"
-              height="200"
-              name="message"
-              label="输入留言内容"
-              class="textarea"
-              v-model="message"
-              background-color="#FFF"
-              color="#666"
-            >
-            </v-textarea>
-            <v-btn type="submit" style="float: right;" class="mr-5">提交</v-btn>
-          </v-form>
-        </v-card>
-        <v-card
-          v-for="(item, index) in messages"
-          :key="item._id"
-          :index="index"
-          class="mt-2 mb-2"
-          width="800"
-        >
-          <v-card-title class="ml-3">
-            {{ item.author.username }}说：
-          </v-card-title>
-          <v-card-subtitle class="ml-6 pb-0">
-            <v-list-item three-line>
-              <v-list-item-subtitle v-html="item.connect">
-              </v-list-item-subtitle>
-            </v-list-item>
-          </v-card-subtitle>
-          <v-divider class="ml-5 mr-5"></v-divider>
-          <v-card-text class=" ml-3 text--primary">
-            <v-icon dense class="ml-3">fas fa-clock</v-icon>
-            <span class="ml-1">{{
-              dataFormat(item.createdAt, 'YYYY-MM-DD')
-            }}</span>
-          </v-card-text>
-        </v-card>
-      </v-layout>
-    </v-container>
+  <v-container class="mt-1 mb-8">
+    <v-layout column align-center>
+      <v-card outlined color="rgba(255, 0, 0, 0)" class="mt-2 mb-2" width="800">
+        <v-form @submit.prevent="addMessage" class="textarea">
+          <v-textarea
+            outlined
+            no-resize
+            counter="100"
+            height="200"
+            name="message"
+            label="输入留言内容"
+            class="textarea"
+            v-model="message"
+            color="#666"
+          >
+          </v-textarea>
+          <v-btn type="submit" style="float: right;" class="mr-5">提交</v-btn>
+        </v-form>
+      </v-card>
+      <v-card
+        v-for="(item, index) in messages"
+        :key="item._id"
+        :index="index"
+        class="mt-2 mb-2"
+        width="800"
+      >
+        <v-card-title class="ml-3">
+          {{ item.author.username }}说：
+        </v-card-title>
+        <v-card-subtitle class="ml-6 pb-0">
+          <v-list-item three-line>
+            <v-list-item-subtitle v-html="item.connect"> </v-list-item-subtitle>
+          </v-list-item>
+        </v-card-subtitle>
+        <v-divider class="ml-5 mr-5"></v-divider>
+        <v-card-text class="ml-3 text--primary">
+          <v-icon dense class="ml-3">fas fa-clock</v-icon>
+          <span class="ml-1">{{
+            dataFormat(item.createdAt, 'YYYY-MM-DD')
+          }}</span>
+        </v-card-text>
+      </v-card>
+    </v-layout>
     <v-snackbar
       v-model="snackbar"
       :bottom="y === 'bottom'"
@@ -78,7 +69,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -97,19 +88,19 @@ export default {
     return {
       uid,
       username,
-      messages
+      messages,
     }
   },
   data: () => ({
     message: '',
-    color: '',
+    color: 'error',
     mode: '',
     snackbar: false,
     text: "Hello, I'm a snackbar",
     timeout: 6000,
-    x: null,
+    x: 'right',
     y: 'top',
-    messages: {}
+    messages: {},
   }),
   methods: {
     async fetch() {
@@ -118,29 +109,26 @@ export default {
     addMessage() {
       if (this.username) {
         if (this.isNull(this.message)) {
-          this.color = 'red'
           this.text = '请输入留言内容！'
           this.snackbar = true
         } else if (!this.isRule(this.message)) {
-          this.color = 'red'
           this.text = '内容仅限中文和数字！'
           this.snackbar = true
         } else if (this.message.length > 100) {
-          this.color = 'red'
           this.text = '字数超出限制！'
           this.snackbar = true
         } else {
           this.$axios.$post('messages', {
             connect: this.message,
-            author: this.uid
+            author: this.uid,
           })
+          this.color = 'success'
           this.text = '留言成功'
           this.snackbar = true
           this.message = ''
           this.fetch()
         }
       } else {
-        this.color = 'red'
         this.text = '此操作需要登陆，请先登录！'
         this.snackbar = true
       }
@@ -159,13 +147,13 @@ export default {
       this.message = this.message.replace(/ /g, '&nbsp;')
       let regu = /[\u4E00-\u9FA5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300ba-zA-Z0-9]/g
       return regu.test(str)
-    }
+    },
   },
   head() {
     return {
-      title: '留言板 - '
+      title: '留言板 - ',
     }
-  }
+  },
 }
 </script>
 
