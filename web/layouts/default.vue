@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-09 15:14:50
+ * @LastEditTime: 2020-07-14 17:33:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\layouts\default.vue
@@ -9,10 +9,10 @@
 <template>
   <v-app>
     <Navbar :items="items" :Lhome="Lhome"></Navbar>
-    <v-content style="background-color: #F1F3F4;">
+    <v-main>
       <nuxt />
       <Bottom></Bottom>
-    </v-content>
+    </v-main>
     <BackTop></BackTop>
     <APlayer></APlayer>
   </v-app>

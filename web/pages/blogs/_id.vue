@@ -1,63 +1,75 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-09 15:22:39
+ * @LastEditTime: 2020-07-14 17:13:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\blogs\_id.vue
 -->
 <template>
-  <div style="margin-top: 45px;">
-    <v-container>
-      <v-layout column justify-center align-center>
-        <v-row>
-          <v-col xs="1" class="md">
-            <v-breadcrumbs :items="toItems">
-              <template v-slot:divider>
-                <v-icon>mdi-chevron-right</v-icon>
-              </template>
-            </v-breadcrumbs>
-            <client-only>
-              <mavon-editor
-                v-model="blog.connect"
-                :subfield="prop.subfield"
-                :default-open="prop.defaultOpen"
-                :toolbars-flag="prop.toolbarsFlag"
-                :editable="prop.editable"
-                :scroll-style="prop.scrollStyle"
-                :codeStyle="prop.codeStyle"
-              ></mavon-editor>
-            </client-only>
-          </v-col>
-        </v-row>
-      </v-layout>
-    </v-container>
-  </div>
+  <v-container class="ma-0 pa-0">
+    <v-layout column align-center justify-center class="mb-15">
+      <!-- <v-row>
+        <v-col xs="1" class="md"> -->
+
+      <!-- <client-only>
+            <mavon-editor
+              v-model="blog.connect"
+              :subfield="prop.subfield"
+              :default-open="prop.defaultOpen"
+              :toolbars-flag="prop.toolbarsFlag"
+              :editable="prop.editable"
+              :scroll-style="prop.scrollStyle"
+              :codeStyle="prop.codeStyle"
+            ></mavon-editor>
+          </client-only> -->
+      <v-breadcrumbs :items="toItems">
+        <template v-slot:divider>
+          <v-icon>mdi-chevron-right</v-icon>
+        </template>
+      </v-breadcrumbs>
+      <v-card v-html="blog.connect" class="pa-5 md" width="800"> </v-card>
+      <!-- </v-col>
+      </v-row> -->
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 import moment from 'moment'
+import marked from 'marked'
 
 export default {
   async asyncData({ params, $axios }) {
-    const blog = await $axios.$get(`blogs/${params.id}`)
+    let blog = await $axios.$get(`blogs/${params.id}`)
     const cate = await $axios.$get(`cates/${blog.cate}`)
     let toItems = [
       {
         text: '首页',
         disabled: true,
-        href: '/'
+        href: '/',
       },
       {
         text: cate.title,
         disabled: true,
-        href: `/cates/${cate._id}`
+        href: `/cates/${cate._id}`,
       },
       {
         text: blog.title,
-        disabled: true
-      }
+        disabled: true,
+      },
     ]
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: false,
+      smartLists: true,
+      smartypants: false,
+    })
+    blog.connect = marked(blog.connect)
     return {
       blog,
       cate,
@@ -72,25 +84,30 @@ export default {
         editable: false,
         toolbarsFlag: false,
         scrollStyle: true,
-        codeStyle: 'agate'
-      }
+        codeStyle: 'agate',
+      },
     }
   },
   methods: {
     dataFormat(dataStr, pattern) {
       return moment(dataStr).format(pattern)
-    }
+    },
   },
   head() {
     return {
-      title: `${this.blog.title} - `
+      title: `${this.blog.title} - `,
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
-.md {
+pre {
+  /* overflow: hidden; */
+  /* max-width: 300px; */
+  overflow: auto !important;
+}
+/* .md {
   margin-bottom: 2rem;
 }
 @media only screen and (min-width: 300px) {
@@ -122,5 +139,5 @@ export default {
   .md {
     width: 50rem;
   }
-}
+} */
 </style>

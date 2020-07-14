@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-12 23:23:02
+ * @LastEditTime: 2020-07-14 17:31:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -31,10 +31,11 @@ export default {
       { scr: 'https://hm.baidu.com/hm.js?1a20acd14ce73e920b167299d8d31bbc'}
     ]
   },
-  loading: { color: '#263238' },
+  // loading: { color: '#263238' },
+  loading: false,
   css: [
     "mavon-editor/dist/css/index.css",
-    '~/static/md.scss'
+    './static/md.scss'
   ],
   plugins: [
     { src: '~/plugins/vue-markdown.js', srr: false },
@@ -65,20 +66,20 @@ export default {
   },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    theme: {
-      dark: false,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+    // theme: {
+    //   dark: false,
+    //   themes: {
+    //     dark: {
+    //       primary: colors.blue.darken2,
+    //       accent: colors.grey.darken3,
+    //       secondary: colors.amber.darken3,
+    //       info: colors.teal.lighten1,
+    //       warning: colors.amber.base,
+    //       error: colors.deepOrange.accent4,
+    //       success: colors.green.accent3
+    //     }
+    //   }
+    // }
   },
   build: {
     extend(config, ctx) {

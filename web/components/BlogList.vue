@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-09 14:24:44
+ * @LastEditTime: 2020-07-14 14:33:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BlogList.vue
 -->
 <template>
-  <v-layout column justify-center align-center class="mt-12 mb-10">
+  <v-layout column justify-center align-center class="mt-1 mb-10">
     <v-card
       v-for="(item, index) in blog"
       :key="item._id"

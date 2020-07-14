@@ -1,19 +1,21 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-09 14:26:31
+ * @LastEditTime: 2020-07-14 14:35:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
 -->
 <template>
   <div>
-    <v-container class="mt-12 mb-8">
-      <v-row>
-        <v-col cols="12" md="6"> </v-col>
-      </v-row>
+    <v-container class="mt-1 mb-8">
       <v-layout column align-center>
-        <v-card outlined color="rgba(255, 0, 0, 0)" class="mt-5 mb-2" width="800" >
+        <v-card
+          outlined
+          color="rgba(255, 0, 0, 0)"
+          class="mt-2 mb-2"
+          width="800"
+        >
           <v-form @submit.prevent="addMessage" class="textarea">
             <v-textarea
               outlined
@@ -35,7 +37,7 @@
           v-for="(item, index) in messages"
           :key="item._id"
           :index="index"
-          class="mt-5 mb-2"
+          class="mt-2 mb-2"
           width="800"
         >
           <v-card-title class="ml-3">
