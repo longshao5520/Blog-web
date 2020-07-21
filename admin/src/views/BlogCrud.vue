@@ -83,7 +83,6 @@ export default class BlogsList extends Vue {
       }
     });
     this.data = res.data.data;
-    window.console.log(this.data[0].connect);
     this.page.total = res.data.total;
   }
 

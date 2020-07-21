@@ -72,7 +72,6 @@ export default {
     async search() {
       const res = await this.$http.get(`blogs/${this.blogID}`);
       this.blog = res.data;
-      window.console.log(this.blog);
     },
     async save() {
       this.blog.author = "龙少5520";

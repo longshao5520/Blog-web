@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-14 14:33:45
+ * @LastEditTime: 2020-07-21 11:26:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BlogList.vue
@@ -29,11 +29,11 @@
         </v-list-item>
       </v-card-subtitle>
       <v-divider class="ml-5 mr-5"></v-divider>
-      <v-card-text class=" ml-3 text--primary">
+      <v-card-text class="ml-3 text--primary">
         <v-icon dense>fas fa-user</v-icon>
         <span class="ml-1">{{ item.author }}</span>
         <v-icon dense class="ml-3">fas fa-clock</v-icon>
-        <span class="ml-1">{{ dataFormat(item.createdAt, 'YYYY-MM-DD') }}</span>
+        <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
       </v-card-text>
     </v-card>
     <v-pagination
@@ -58,7 +58,7 @@ export default {
     isPagination: false,
     blogs: {},
     blog: Array,
-    data() {}
+    data() {},
   },
   methods: {
     loadData() {
@@ -95,10 +95,7 @@ export default {
         }
       }, 20)
     },
-    dataFormat(dataStr, pattern) {
-      return moment(dataStr).format(pattern)
-    }
-  }
+  },
 }
 </script>
 

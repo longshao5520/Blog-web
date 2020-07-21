@@ -1,24 +1,25 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-20 10:11:45
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\web\pages\photos.vue
+-->
 <template>
   <!-- <client-only>
     {{photos}}
   </client-only>-->
   <v-container class="lighten-5">
-    <!-- <v-row>
-    <v-col md="2" sm="4">-->
-    <div class="box">
-      <v-card
-        v-for="item in photos"
-        :key="item._id"
-        color="#263238"
-        elevation="0"
-        max-width="300"
-        class="mt-2"
-      >
-        <v-img :src="item" contain></v-img>
-      </v-card>
-    </div>
-    <!-- </v-col>
-    </v-row>-->
+    <v-row>
+      <v-col v-for="item in photos" :key="item._id" md="2" sm="4">
+        <!-- <div class="box"> -->
+        <v-card color="#263238" elevation="0" max-width="300" class="mt-2">
+          <v-img :src="item" contain></v-img>
+        </v-card>
+        <!-- </div> -->
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -34,21 +35,23 @@ export default {
       photos.push(res.data[i].file)
     }
     return {
-      photos
+      photos,
     }
   },
-  data() {
-    console.log(this.photos)
-  }
+  data() {},
+  head() {
+    return {
+      title: '相册 - ',
+    }
+  },
 }
 </script>
 
 <style>
-@media only screen and (min-width: 960px) {
+/* @media only screen and (min-width: 960px) {
   .box {
     margin: 10px auto;
     width: 900px;
-    /* height: 100vh; */
     column-count: 3;
     column-gap: 10px;
   }
@@ -58,9 +61,6 @@ export default {
   .box {
     margin: 10px auto;
     width: 80%;
-    /* height: 100vh;
-    column-count: 1;
-    column-gap: 10px; */
   }
-}
+} */
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-14 18:46:48
+ * @LastEditTime: 2020-07-21 11:27:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
@@ -44,9 +44,7 @@
         <v-divider class="ml-5 mr-5"></v-divider>
         <v-card-text class="ml-3 text--primary">
           <v-icon dense class="ml-3">fas fa-clock</v-icon>
-          <span class="ml-1">{{
-            dataFormat(item.createdAt, 'YYYY-MM-DD')
-          }}</span>
+          <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
         </v-card-text>
       </v-card>
     </v-layout>
@@ -73,8 +71,6 @@
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
   async asyncData({ $axios, store }) {
     const messages = await $axios.$get('/messages/list')
@@ -132,9 +128,6 @@ export default {
         this.text = '此操作需要登陆，请先登录！'
         this.snackbar = true
       }
-    },
-    dataFormat(dataStr, pattern) {
-      return moment(dataStr).format(pattern)
     },
     isNull(str) {
       if (str == '' || str == null || str == '\n') return true

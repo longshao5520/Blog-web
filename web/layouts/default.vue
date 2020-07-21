@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-14 17:33:10
+ * @LastEditTime: 2020-07-21 09:38:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\layouts\default.vue
@@ -51,7 +51,7 @@ export default {
         to: `/cates/5e4db1523f05360c96dde820`
       },
       { icon: 'fas fa-comments', title: '留言板', to: '/messages' },
-      { icon: 'fas fa-people-carry', title: '友链', to: '/links' }
+      { icon: 'fas fa-people-carry', title: '我的朋友', to: '/links' }
     ],
     Lhome: {}
   }),

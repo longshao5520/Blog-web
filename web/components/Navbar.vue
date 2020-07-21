@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-02 22:35:50
- * @LastEditTime: 2020-07-14 17:31:09
+ * @LastEditTime: 2020-07-21 09:29:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\Navbar.vue
@@ -66,21 +66,21 @@
         ></v-text-field>
       </v-row> -->
       <v-spacer></v-spacer>
-      <v-btn v-if="$store.state.auth.user" @click="logOut" text class="ml-3">
-        <v-icon dense class="mt-1 mr-1">fas fa-power-off</v-icon>
-        安全退出
-      </v-btn>
       <v-switch
         v-model="$vuetify.theme.dark"
         hide-details
         class="ma-2"
       ></v-switch>
+      <v-btn v-if="$store.state.auth.user" @click="logOut" text class="ml-3">
+        <v-icon dense class="mt-1 mr-1">fas fa-power-off</v-icon>
+        安全退出
+      </v-btn>
       <v-btn
         v-if="!$store.state.auth.user"
         @click="isShowLoginForm = true"
         icon
       >
-        <v-icon>fas fa-user-lock</v-icon>
+        <v-icon dense>fas fa-user-lock</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -130,6 +130,7 @@ export default {
       await this.$auth.loginWith('local', {
         data: this.loginModel,
       })
+      this.loginModel = {}
       this.isShowLoginForm = false
     },
     logOut() {
@@ -138,10 +139,6 @@ export default {
   },
   created() {
     if (process.browser) {
-      console.log(
-        window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches
-      )
       this.$vuetify.theme.dark =
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches

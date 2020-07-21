@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-14 17:31:52
+ * @LastEditTime: 2020-07-21 11:29:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -39,6 +39,7 @@ export default {
   ],
   plugins: [
     { src: '~/plugins/vue-markdown.js', srr: false },
+    { src: '~/plugins/vue-filter.js', srr: false },
     { src: '~/plugins/baidu.js'}
   ],
   buildModules: [

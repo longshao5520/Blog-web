@@ -1,19 +1,25 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-20 16:21:25
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\admin\src\views\ResourceCrud.vue
+--> 
 <template>
-  <div>
-    <avue-crud
-      v-if="option.column"
-      :page="page"
-      :data="data.data"
-      :option="option"
-      @row-save="create"
-      @row-update="update"
-      @row-del="remove"
-      @on-load="changePage"
-    ></avue-crud>
-  </div>
+  <avue-crud
+    v-if="option.column"
+    :page="page"
+    :data="data.data"
+    :option="option"
+    @row-save="create"
+    @row-update="update"
+    @row-del="remove"
+    @on-load="changePage"
+  ></avue-crud>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import { Vue, Component, Ref, Prop } from "vue-property-decorator";
 
 @Component({
@@ -28,10 +34,10 @@ export default class ResourceList extends Vue {
   page: any = {
     pageSize: 5,
     pageSizes: [5, 10],
-    total: 10
+    total: 10,
   };
   query: any = {
-    sort: "-_id"
+    sort: "-_id",
   };
 
   async fetchOption() {
@@ -48,8 +54,8 @@ export default class ResourceList extends Vue {
   async fetch() {
     const res = await this.$http.get(`${this.resource}`, {
       params: {
-        query: this.query
-      }
+        query: this.query,
+      },
     });
     this.data = res.data;
     this.page.total = res.data.total;
@@ -89,5 +95,4 @@ export default class ResourceList extends Vue {
 }
 </script>
 
-<style>
-</style>
+<style></style>

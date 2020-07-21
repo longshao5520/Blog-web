@@ -26,7 +26,6 @@ export default class Login extends Vue {
 
   async login() {
     const res = await this.$http.post("login", this.data);
-    window.console.log(res);
   }
 }
 </script>
