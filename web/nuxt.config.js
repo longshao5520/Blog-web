@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-21 11:29:21
+ * @LastEditTime: 2020-07-22 20:07:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -11,9 +11,7 @@ require('dotenv').config()
 export default {
   mode: 'universal',
   head: {
-    // titleTemplate: '%s龙少5520',
     titleTemplate: `%s${process.env.APP_NAME}`,
-    // title: process.env.npm_package_name || '',
     title: `%s${process.env.APP_NAME}` || '',
     meta: [
       { charset: 'utf-8' },
@@ -31,11 +29,9 @@ export default {
       { scr: 'https://hm.baidu.com/hm.js?1a20acd14ce73e920b167299d8d31bbc'}
     ]
   },
-  // loading: { color: '#263238' },
   loading: false,
   css: [
     "mavon-editor/dist/css/index.css",
-    './static/md.scss'
   ],
   plugins: [
     { src: '~/plugins/vue-markdown.js', srr: false },

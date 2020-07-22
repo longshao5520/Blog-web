@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-21 11:26:28
+ * @LastEditTime: 2020-07-22 21:27:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BlogList.vue
@@ -50,15 +50,30 @@
 </template>
 
 <script>
-import moment from 'moment'
 export default {
   props: {
-    page: Number,
-    rowsPerPage: Number,
-    isPagination: false,
     blogs: {},
-    blog: Array,
-    data() {},
+  },
+  data: () => ({
+    isPagination: false,
+    page: 1,
+    rowsPerPage: 5,
+    blog: [],
+  }),
+  mounted() {
+    if (Math.ceil(this.blogs.total / this.rowsPerPage) > 1) {
+      this.isPagination = true
+      if (this.page == 1) {
+        this.blog = []
+        for (let i = 0; i < this.rowsPerPage; i++) {
+          this.blog.push(this.blogs.data[i])
+        }
+      }
+    } else {
+      for (let i in this.blogs.data) {
+        this.blog.push(this.blogs.data[i])
+      }
+    }
   },
   methods: {
     loadData() {
@@ -67,7 +82,7 @@ export default {
         for (let i = 0; i < this.rowsPerPage; i++) {
           this.blog.push(this.blogs.data[i])
         }
-      } else if (this.page < Math.ceil(this.blogs.total / 5)) {
+      } else if (this.page < Math.ceil(this.blogs.total / this.rowsPerPage)) {
         this.blog = []
         for (
           let i = Math.ceil((this.page - 1) * this.rowsPerPage);
@@ -76,7 +91,7 @@ export default {
         ) {
           this.blog.push(this.blogs.data[i])
         }
-      } else if (this.page == Math.ceil(this.blogs.total / 5)) {
+      } else if (this.page == Math.ceil(this.blogs.total / this.rowsPerPage)) {
         this.blog = []
         for (
           let i = Math.ceil((this.page - 1) * this.rowsPerPage);

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-07 14:23:03
+ * @LastEditTime: 2020-07-22 21:27:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BackTop.vue
@@ -9,13 +9,13 @@
 <template>
   <div class="test-box">
     <div class="scrollTop" v-show="showTop" @click="gotop">
-      <v-icon color="#666" large>fas fa-caret-up</v-icon>
+      <!-- <v-icon color="white" large>fas fa-caret-up</v-icon> -->
+      <i>top</i>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'this-is-backtop-test',
   data() {
     return {
       scrollTop: 0
@@ -55,14 +55,14 @@ export default {
   position: fixed;
   right: 5%;
   bottom: 10%;
-  background-color: #e4e5e6;
+  background-color: #666;
+  color: white;
   width: 3rem;
   height: 3rem;
+  line-height: 3rem;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
+  text-align: center;
+  font-size: 1.3rem;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   z-index: 5;

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-14 17:34:41
+ * @LastEditTime: 2020-07-22 19:54:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\a\_cate.vue
@@ -9,13 +9,7 @@
 <template>
   <v-container>
     <Title :title="title"></Title>
-    <BlogList
-      :blogs="blogs"
-      :blog="blog"
-      :isPagination="isPagination"
-      :page="page"
-      :rowsPerPage="rowsPerPage"
-    ></BlogList>
+    <BlogList :blogs="blogs"></BlogList>
   </v-container>
 </template>
 
@@ -35,23 +29,6 @@ export default {
         query: { where: { cate: params.id }, sort: '-_id' },
       },
     })
-    let blog = []
-    let isPagination = false
-    let page = 1
-    let rowsPerPage = 5
-    if (Math.ceil(blogs.total / 5) > 1) {
-      isPagination = true
-      if (page == 1) {
-        blog = []
-        for (let i = 0; i < rowsPerPage; i++) {
-          blog.push(blogs.data[i])
-        }
-      }
-    } else {
-      for (let i in blogs.data) {
-        blog.push(blogs.data[i])
-      }
-    }
     return {
       title: {
         title: cate.title,
@@ -59,10 +36,6 @@ export default {
       },
       cate,
       blogs,
-      blog,
-      isPagination,
-      page,
-      rowsPerPage,
     }
   },
   head() {
