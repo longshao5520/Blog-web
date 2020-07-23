@@ -1,0 +1,19 @@
+.md{
+  pre{
+    overflow: auto !important;
+    padding: .4rem !important;
+    background: #ccc !important;
+    code{
+      background: none !important;
+    }
+  }
+  code{
+    background: none !important;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    img {
+      width: 80vw;
+    }
+  }
+}

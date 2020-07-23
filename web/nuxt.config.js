@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-22 20:07:49
+ * @LastEditTime: 2020-07-23 16:30:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -32,6 +32,7 @@ export default {
   loading: false,
   css: [
     "mavon-editor/dist/css/index.css",
+    "~/static/index.scss",
   ],
   plugins: [
     { src: '~/plugins/vue-markdown.js', srr: false },

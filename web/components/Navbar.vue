@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-02 22:35:50
- * @LastEditTime: 2020-07-22 21:22:58
+ * @LastEditTime: 2020-07-23 16:22:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\Navbar.vue
@@ -30,7 +30,7 @@
     <v-app-bar app dense clipped-left flat>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="mr-12 align-center">
-        <span class="subtitle-1 font-weight-bold">{{ Lhome.title }}</span>
+        <span class="font-weight-bold">{{ Lhome.title }}</span>
       </v-toolbar-title>
       <!-- <v-spacer></v-spacer> -->
 
@@ -169,15 +169,14 @@ export default {
     },
   },
   created() {
-    if (process.browser) {
-      this.$vuetify.theme.dark =
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-    }
+    // if (process.browser) {
+    //   this.$vuetify.theme.dark =
+    //     window.matchMedia &&
+    //     window.matchMedia('(prefers-color-scheme: dark)').matches
+    // }
   },
   watch: {
     isShowLoginForm(newValue) {
-      this.$emit('newIsShowLoginForm', newValue)
       if (!newValue) {
         this.isLoginForm = true
         this.loginModel = {}
