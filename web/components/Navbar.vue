@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-02 22:35:50
- * @LastEditTime: 2020-07-23 16:22:36
+ * @LastEditTime: 2020-07-23 21:27:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\Navbar.vue
@@ -136,6 +136,25 @@
         </v-card>
       </v-form>
     </v-dialog>
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="y === 'bottom'"
+      :color="color"
+      :left="x === 'left'"
+      :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :vertical="mode === 'vertical'"
+    >
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn dark text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -146,45 +165,95 @@ export default {
     Lhome: {},
   },
   data: () => ({
+    drawer: null,
     isShowLoginForm: false,
     isLoginForm: Boolean,
     loginModel: {},
     registerModule: {},
-    drawer: null,
+    // registerUname: '',
+    // registerPwd: '',
+    // registerRepwd: '',
+    // isCanRegister: false,
+    message: '',
+    color: 'error',
+    mode: '',
+    snackbar: false,
+    text: "Hello, I'm a snackbar",
+    timeout: 6000,
+    x: 'right',
+    y: 'top',
   }),
   methods: {
     async login() {
-      await this.$auth.loginWith('local', {
-        data: this.loginModel,
-      })
-      this.loginModel = {}
-      this.isShowLoginForm = false
+      if (
+        this.loginModel.username != undefined &&
+        this.loginModel.password != undefined
+      ) {
+        await this.$auth.loginWith('local', {
+          data: this.loginModel,
+        })
+        this.loginModel = {}
+        this.isShowLoginForm = false
+      }else{
+        this.text = '用户名密码不能为空'
+        this.snackbar = true
+      }
     },
     async register() {
-      // await this.$axios.$post('/auth/register', )
-      console.log(this.registerModule)
+      if (
+        this.registerModule.username != undefined &&
+        this.registerModule.password != undefined &&
+        this.registerModule.repassword != undefined
+      ) {
+        if (
+          this.registerModule.username.length < 2 &&
+          this.registerModule.username.length > 8
+        ) {
+          this.text = '用户名最少两个字符，最多八个'
+          this.snackbar = true
+        } else if (this.registerModule.password.length < 8) {
+          this.text = '密码不能少于八个字符'
+          this.snackbar = true
+        } else if (
+          this.registerModule.password != this.registerModule.repassword
+        ) {
+          this.text = '两次密码不一致'
+          this.snackbar = true
+        } else {
+          console.log(this.registerModule)
+          await this.$axios.$post('/auth/register', {
+            username: this.registerModule.username,
+            password: this.registerModule.password,
+          })
+          this.text = '注册成功'
+          this.color = 'success'
+          this.snackbar = true
+          this.isLoginForm = true
+        }
+      } else {
+        this.text = '用户名密码不能为空'
+        this.snackbar = true
+      }
     },
     logOut() {
       this.$auth.logout()
     },
   },
   created() {
-    // if (process.browser) {
-    //   this.$vuetify.theme.dark =
-    //     window.matchMedia &&
-    //     window.matchMedia('(prefers-color-scheme: dark)').matches
-    // }
+    if (process.browser) {
+      this.$vuetify.theme.dark =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
   },
   watch: {
     isShowLoginForm(newValue) {
       if (!newValue) {
         this.isLoginForm = true
         this.loginModel = {}
-      }
-    },
-    registerModule() {
-      if (this.registerModule.password != this.registerModule.repassword) {
-        console.log('两次密码不一致')
+        this.registerUname = ''
+        this.registerPwd = ''
+        this.registerRepwd = ''
       }
     },
   },
