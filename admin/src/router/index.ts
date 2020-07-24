@@ -13,7 +13,7 @@ const routes = [
     path: '/',
     component: Main,
     children: [
-      { name: 'home', path: '/', redirect: '/home/list', },
+      { name: 'home', path: '/', redirect: '/login', },
       { name: 'crud', path: '/:resource/list', component: ResourceCrud, props: true },
       { name: 'blogs - edit', path: '/blogs/edit', component: BlogEdit, props: true },
     ]

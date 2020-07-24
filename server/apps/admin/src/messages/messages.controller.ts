@@ -1,10 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+/*
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-24 20:11:57
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\server\apps\admin\src\messages\messages.controller.ts
+ */ 
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { Message } from '@libs/db/models/message.model';
 import { Crud } from 'nestjs-mongoose-crud'
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { User } from '@libs/db/models/user.model';
+import { AuthGuard } from '@nestjs/passport';
 
 @Crud({
   model: Message,
@@ -27,6 +36,8 @@ import { User } from '@libs/db/models/user.model';
 
 @Controller('messages')
 @ApiTags('留言')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 export class MessagesController {
   constructor(
     @InjectModel(Message) private readonly model: ReturnModelType<typeof Message>,

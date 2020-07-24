@@ -1,10 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { Blog } from '@libs/db/models/blog.model';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { Crud } from 'nestjs-mongoose-crud'
 import { Cate } from '@libs/db/models/cate.model';
 import { ReturnModelType } from '@typegoose/typegoose';
+import { AuthGuard } from '@nestjs/passport';
 
 @Crud({
   model: Blog,
@@ -39,6 +40,8 @@ import { ReturnModelType } from '@typegoose/typegoose';
 
 @Controller('blogs')
 @ApiTags('文章')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 export class BlogsController {
   constructor(
     @InjectModel(Blog) private readonly model: ReturnModelType<typeof Blog>,

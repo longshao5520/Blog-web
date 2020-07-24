@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-24 21:29:29
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\admin\src\views\Login.vue
+-->
 <template>
   <el-card header="后台管理 - 登录" class="login-card">
     <el-form @submit.native.prevent="login">
@@ -21,11 +29,18 @@ import { Component, Vue } from "vue-property-decorator";
 export default class Login extends Vue {
   data = {
     username: "",
-    password: ""
+    password: "",
   };
 
   async login() {
-    const res = await this.$http.post("login", this.data);
+    await this.$http.post("login", this.data).then((res) => {
+      // window.console.log(res);
+      localStorage.token = res.data.token;
+      this.$router.push("/home/list");
+      // this.$message.success(`登录成功，欢迎你${res.data.username}`)
+      this.$message.success("登录成功");
+    });
+    // const res = await this.$http.post("login", this.data);
   }
 }
 </script>

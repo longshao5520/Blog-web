@@ -1,7 +1,12 @@
 <template>
   <el-container>
     <el-aside width="200px">
-      <el-menu mode="vertical" style="height:100vh" :default-active="$route.path" router>
+      <el-menu
+        mode="vertical"
+        style="height:100vh"
+        :default-active="$route.path"
+        router
+      >
         <el-submenu
           v-for="(item, index) in menu.items"
           :index="`menu-item-${index}}`"
@@ -9,15 +14,15 @@
         >
           <template slot="title">
             <i :class="item.icon"></i>
-            {{item.title}}
+            {{ item.title }}
           </template>
           <el-menu-item
-            v-for="(subItem, subIndex) in item.items "
+            v-for="(subItem, subIndex) in item.items"
             :index="subItem.path"
             :key="`menu-item-${index}-${subIndex}`"
           >
             <i :class="subItem.icon"></i>
-            {{subItem.title}}
+            {{ subItem.title }}
           </el-menu-item>
         </el-submenu>
       </el-menu>
@@ -36,7 +41,9 @@
                 <i class="el-icon-setting"></i>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>修改密码</el-dropdown-item>
-                  <el-dropdown-item>退出登录</el-dropdown-item>
+                  <el-dropdown-item>
+                    <span @click="logout()">退出登录</span>
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
               <span>longshao</span>
@@ -63,8 +70,8 @@ export default class Main extends Vue {
         icon: "el-icon-s-home",
         items: [
           { title: "Home", icon: "el-icon-s-home", path: "/home/list" },
-          { title: "友链管理", icon: "el-icon-link", path: "/friends/list" }
-        ]
+          { title: "友链管理", icon: "el-icon-link", path: "/friends/list" },
+        ],
       },
       {
         title: "内容管理",
@@ -73,16 +80,16 @@ export default class Main extends Vue {
           {
             title: "分类管理",
             icon: "el-icon-s-operation",
-            path: "/cates/list"
+            path: "/cates/list",
           },
           { title: "文章管理", icon: "el-icon-document", path: "/blogs/list" },
           { title: "文章内容", icon: "el-icon-document", path: "/blogs/edit" },
           {
             title: "相片管理",
             icon: "el-icon-picture-outline-round",
-            path: "/photos/list"
-          }
-        ]
+            path: "/photos/list",
+          },
+        ],
       },
       {
         title: "运营管理",
@@ -93,12 +100,18 @@ export default class Main extends Vue {
           {
             title: "留言管理",
             icon: "el-icon-tickets",
-            path: "/messages/list"
-          }
-        ]
-      }
-    ]
+            path: "/messages/list",
+          },
+        ],
+      },
+    ],
   };
+  async logout() {
+    window.console.log("object");
+    localStorage.clear();
+    this.$router.push("/login");
+    this.$message.success("注销成功");
+  }
 }
 </script>
 

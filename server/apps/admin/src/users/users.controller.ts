@@ -1,9 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
+/*
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-24 20:12:09
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\server\apps\admin\src\users\users.controller.ts
+ */ 
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { User } from '@libs/db/models/user.model';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { Crud } from 'nestjs-mongoose-crud'
 import { ReturnModelType } from '@typegoose/typegoose';
+import { AuthGuard } from '@nestjs/passport';
 
 @Crud({
   model: User,
@@ -27,6 +36,8 @@ import { ReturnModelType } from '@typegoose/typegoose';
 
 @Controller('users')
 @ApiTags('用户')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 export class UsersController {
   constructor(
     @InjectModel(User) private readonly model: ReturnModelType<typeof User>,

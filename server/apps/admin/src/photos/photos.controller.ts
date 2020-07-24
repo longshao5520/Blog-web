@@ -1,9 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
+/*
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-24 20:18:21
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\server\apps\admin\src\photos\photos.controller.ts
+ */ 
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { Photo } from '@libs/db/models/photo.model';
 import { Crud } from 'nestjs-mongoose-crud'
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { ReturnModelType } from '@typegoose/typegoose';
+import { AuthGuard } from '@nestjs/passport';
 
 @Crud({
   model: Photo,
@@ -34,6 +43,8 @@ import { ReturnModelType } from '@typegoose/typegoose';
 
 @Controller('photos')
 @ApiTags('相片')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 export class PhotosController {
   constructor(
     @InjectModel(Photo) private readonly model: ReturnModelType<typeof Photo>,

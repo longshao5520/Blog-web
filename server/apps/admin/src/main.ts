@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-20 10:22:17
- * @LastEditors: your name
+ * @LastEditTime: 2020-07-24 20:14:23
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\server\apps\admin\src\main.ts
  */ 
@@ -19,6 +19,7 @@ async function bootstrap() {
     .setTitle('龙少5520 - 后台管理API')
     .setDescription('供后台管理界面调用的服务端API')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-docs', app, document);
@@ -28,3 +29,4 @@ async function bootstrap() {
   console.log(`http://localhost:${PORT}/api-docs`)
 }
 bootstrap();
+ 

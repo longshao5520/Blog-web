@@ -1,35 +1,59 @@
-import { Controller, Get, Post, UseInterceptors, UploadedFile, Body } from '@nestjs/common';
-import { AppService } from './app.service';
-import { FileInterceptor } from '@nestjs/platform-express'
-import { ApiOperation } from '@nestjs/swagger';
+/*
+ * @Author: your name
+ * @Date: 2020-06-12 09:23:10
+ * @LastEditTime: 2020-07-24 21:12:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Nest-Vue-Blog\server\apps\admin\src\app.controller.ts
+ */
+
+import {
+  Controller,
+  Get,
+  Post,
+  UseInterceptors,
+  UploadedFile,
+  Body,
+  UseGuards,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiOperation, ApiProperty, ApiBearerAuth } from '@nestjs/swagger';
 import { InjectModel } from 'nestjs-typegoose';
-import { Admin } from '@libs/db/models/admin.model';
+import { Admin, AdminDocument } from '@libs/db/models/admin.model';
 import { ReturnModelType } from '@typegoose/typegoose';
+import { CurrentUser } from './auth/admin.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtService } from '@nestjs/jwt';
+
+class LoginDto {
+  @ApiProperty()
+  username: string;
+  @ApiProperty()
+  password: string;
+}
 
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService,
-    @InjectModel(Admin) private readonly model: ReturnModelType<typeof Admin>,
-  ) { }
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+    private jwtService: JwtService,
+    @InjectModel(Admin) private readonly adminModel: ReturnModelType<typeof Admin>,
+  ) {}
 
   @Post('upload')
   @ApiOperation({ summary: '上传' })
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @UseInterceptors(FileInterceptor('file'))
   async upload(@UploadedFile('file') file) {
-    return file
+    return file;
   }
 
   @Post('login')
-  async login(@Body() dto) {
-    const { username, password } = dto
-    const admin = await this.model.findOne({ username })
-    console.log(admin)
-    return dto
+  @ApiOperation({ summary: '登录' })
+  @UseGuards(AuthGuard('local'))
+  async login(@Body() dto: LoginDto, @CurrentUser() user: AdminDocument) {
+    return {
+      token: this.jwtService.sign(String(user._id))
+    }
   }
 }
