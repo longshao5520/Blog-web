@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-21 11:27:41
+ * @LastEditTime: 2020-07-25 22:06:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
@@ -14,12 +14,11 @@
           <v-textarea
             outlined
             no-resize
-            counter="100"
-            height="200"
-            name="message"
+            counter="30"
+            height="150"
             label="输入留言内容"
             class="textarea"
-            v-model="message"
+            v-model="connect"
             color="#666"
           >
           </v-textarea>
@@ -73,22 +72,14 @@
 <script>
 export default {
   async asyncData({ $axios, store }) {
-    const messages = await $axios.$get('/messages/list')
-    var uid = ''
-    var username = ''
-    if (store.$auth.user) {
-      var user = store.$auth.user
-      var username = store.$auth.user.username
-      var uid = store.$auth.user._id
-    }
+    const messages = await $axios.$get('messages')
+    let isLogin = store.$auth.user ? true : false
     return {
-      uid,
-      username,
+      isLogin,
       messages,
     }
   },
   data: () => ({
-    message: '',
     color: 'error',
     mode: '',
     snackbar: false,
@@ -97,32 +88,36 @@ export default {
     x: 'right',
     y: 'top',
     messages: {},
+    connect: '',
   }),
   methods: {
     async fetch() {
-      this.messages = await this.$axios.$get('/messages/list')
+      console.log('object');
+      this.messages = await this.$axios.$get('messages')
     },
-    addMessage() {
-      if (this.username) {
-        if (this.isNull(this.message)) {
+    async addMessage() {
+      if (this.isLogin) {
+        if (this.isNull(this.connect)) {
           this.text = '请输入留言内容！'
           this.snackbar = true
-        } else if (!this.isRule(this.message)) {
+        } else if (!this.isRule(this.connect)) {
           this.text = '内容仅限中文和数字！'
           this.snackbar = true
-        } else if (this.message.length > 100) {
+        } else if (this.connect.length > 100) {
           this.text = '字数超出限制！'
           this.snackbar = true
         } else {
-          this.$axios.$post('messages', {
-            connect: this.message,
-            author: this.uid,
+          await this.$axios.$post('messages', {
+            connect: this.connect,
           })
           this.color = 'success'
           this.text = '留言成功'
           this.snackbar = true
-          this.message = ''
+          this.connect = ''
           this.fetch()
+          this.timer = setTimeout(() => {
+            this.isMessage = false;
+          }, 3000)
         }
       } else {
         this.text = '此操作需要登陆，请先登录！'
@@ -136,8 +131,8 @@ export default {
       return re.test(str)
     },
     isRule(str) {
-      this.message = this.message.replace(/\n/g, '<br/>')
-      this.message = this.message.replace(/ /g, '&nbsp;')
+      str = str.replace(/\n/g, '<br/>')
+      str = str.replace(/ /g, '&nbsp;')
       let regu = /[\u4E00-\u9FA5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300ba-zA-Z0-9]/g
       return regu.test(str)
     },
