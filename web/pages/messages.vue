@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-26 19:27:15
+ * @LastEditTime: 2020-07-26 22:16:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
@@ -37,13 +37,13 @@
         <v-list-item class="grow">
           <v-list-item-avatar color="grey darken-1">
             <span class="white--text">
-              {{ $store.state.auth.user.username[0].toUpperCase() }}
+              {{ item.author.username[0].toUpperCase() }}
             </span>
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title>
-              {{ $store.state.auth.user.username }}
+              {{ item.author.username }}
             </v-list-item-title>
           </v-list-item-content>
 
