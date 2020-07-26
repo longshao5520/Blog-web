@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-02 22:35:50
- * @LastEditTime: 2020-07-26 18:19:53
+ * @LastEditTime: 2020-07-26 22:08:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\Navbar.vue
@@ -32,9 +32,9 @@
       <v-toolbar-title class="mr-12 align-center">
         <span class="font-weight-bold">{{ Lhome.title }}</span>
       </v-toolbar-title>
-      <!-- <v-spacer></v-spacer> -->
+      <!-- <v-spacer></v-spacer>
 
-      <!-- <v-row align="center" style="max-width: 20vw;" class="ml-5">
+      <v-row align="center" style="max-width: 20vw;" class="ml-5">
         <v-text-field
           rounded
           dense
@@ -55,7 +55,7 @@
         <v-icon dense v-if="$vuetify.theme.dark">fas fa-moon</v-icon>
         <v-icon dense v-else>fas fa-sun</v-icon>
       </v-btn>
-      <v-menu v-if="$store.state.auth.user" bottom offset-y>
+      <v-menu v-if="$store.state.auth.user" open-on-hover bottom offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="rgba(0, 0, 0, 0)"
@@ -66,8 +66,8 @@
             text
             class="pa-0"
           >
-            <v-list-item-avatar color="blue" class="pa-0">
-              <span class="white--text pa-0">
+            <v-list-item-avatar color="grey darken-1" class="pa-0 ma-0">
+              <span class="white--text">
                 {{ $store.state.auth.user.username[0].toUpperCase() }}
               </span>
             </v-list-item-avatar>
@@ -161,24 +161,8 @@
         </v-card>
       </v-form>
     </v-dialog>
-    <v-snackbar
-      v-model="snackbar"
-      :bottom="y === 'bottom'"
-      :color="color"
-      :left="x === 'left'"
-      :multi-line="mode === 'multi-line'"
-      :right="x === 'right'"
-      :timeout="timeout"
-      :top="y === 'top'"
-      :vertical="mode === 'vertical'"
-    >
+    <v-snackbar v-model="snackbar" :color="color" :timeout="3000" top>
       {{ text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
     </v-snackbar>
   </div>
 </template>
@@ -196,13 +180,9 @@ export default {
     loginModel: {},
     registerModule: {},
     message: '',
+    text: '',
     color: 'error',
-    mode: '',
     snackbar: false,
-    text: "Hello, I'm a snackbar",
-    timeout: 6000,
-    x: 'right',
-    y: 'top',
   }),
   methods: {
     async register() {

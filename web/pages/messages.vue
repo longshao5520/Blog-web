@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-25 22:06:55
+ * @LastEditTime: 2020-07-26 19:27:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
@@ -29,42 +29,38 @@
         v-for="(item, index) in messages"
         :key="item._id"
         :index="index"
-        class="mt-2 mb-2"
+        class="mt-2 mb-2 pa-2"
         width="800"
       >
-        <v-card-title class="ml-3">
-          {{ item.author.username }}说：
-        </v-card-title>
-        <v-card-subtitle class="ml-6 pb-0">
-          <v-list-item three-line>
-            <v-list-item-subtitle v-html="item.connect"> </v-list-item-subtitle>
-          </v-list-item>
-        </v-card-subtitle>
-        <v-divider class="ml-5 mr-5"></v-divider>
-        <v-card-text class="ml-3 text--primary">
-          <v-icon dense class="ml-3">fas fa-clock</v-icon>
-          <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
-        </v-card-text>
+        <v-card-text v-html="item.connect" class="ml-3"></v-card-text>
+        <v-divider></v-divider>
+        <v-list-item class="grow">
+          <v-list-item-avatar color="grey darken-1">
+            <span class="white--text">
+              {{ $store.state.auth.user.username[0].toUpperCase() }}
+            </span>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ $store.state.auth.user.username }}
+            </v-list-item-title>
+          </v-list-item-content>
+
+          <v-row align="center" justify="end" class="pr-5">
+            <!-- <v-icon class="mr-1">mdi-heart</v-icon>
+            <span class="subheading mr-2">256</span>
+            <span class="mr-1">·</span>
+            <v-icon class="mr-1">mdi-share-variant</v-icon>
+            <span class="subheading">45</span> -->
+            <v-icon dense class="ml-3">fas fa-clock</v-icon>
+            <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
+          </v-row>
+        </v-list-item>
       </v-card>
     </v-layout>
-    <v-snackbar
-      v-model="snackbar"
-      :bottom="y === 'bottom'"
-      :color="color"
-      :left="x === 'left'"
-      :multi-line="mode === 'multi-line'"
-      :right="x === 'right'"
-      :timeout="timeout"
-      :top="y === 'top'"
-      :vertical="mode === 'vertical'"
-    >
+    <v-snackbar v-model="snackbar" :color="color" :timeout="3000" top>
       {{ text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
     </v-snackbar>
   </v-container>
 </template>
@@ -81,18 +77,13 @@ export default {
   },
   data: () => ({
     color: 'error',
-    mode: '',
     snackbar: false,
-    text: "Hello, I'm a snackbar",
-    timeout: 6000,
-    x: 'right',
-    y: 'top',
+    text: '',
     messages: {},
     connect: '',
   }),
   methods: {
     async fetch() {
-      console.log('object');
       this.messages = await this.$axios.$get('messages')
     },
     async addMessage() {
@@ -107,6 +98,8 @@ export default {
           this.text = '字数超出限制！'
           this.snackbar = true
         } else {
+          this.connect = this.connect.replace(/\n/g, '<br/>')
+          this.connect = this.connect.replace(/ /g, '&nbsp;')
           await this.$axios.$post('messages', {
             connect: this.connect,
           })
@@ -115,9 +108,6 @@ export default {
           this.snackbar = true
           this.connect = ''
           this.fetch()
-          this.timer = setTimeout(() => {
-            this.isMessage = false;
-          }, 3000)
         }
       } else {
         this.text = '此操作需要登陆，请先登录！'
@@ -131,8 +121,6 @@ export default {
       return re.test(str)
     },
     isRule(str) {
-      str = str.replace(/\n/g, '<br/>')
-      str = str.replace(/ /g, '&nbsp;')
       let regu = /[\u4E00-\u9FA5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300ba-zA-Z0-9]/g
       return regu.test(str)
     },
@@ -145,8 +133,4 @@ export default {
 }
 </script>
 
-<style>
-.textarea {
-  width: 100%;
-}
-</style>
+<style></style>
