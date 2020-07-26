@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-02 22:35:50
- * @LastEditTime: 2020-07-23 21:27:13
+ * @LastEditTime: 2020-07-26 18:19:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\Navbar.vue
@@ -27,7 +27,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app dense clipped-left flat>
+    <v-app-bar app clipped-left flat>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="mr-12 align-center">
         <span class="font-weight-bold">{{ Lhome.title }}</span>
@@ -55,15 +55,40 @@
         <v-icon dense v-if="$vuetify.theme.dark">fas fa-moon</v-icon>
         <v-icon dense v-else>fas fa-sun</v-icon>
       </v-btn>
-      <v-toolbar-title v-if="$store.state.auth.user">
-        <span class="subtitle-1"
-          >欢迎你，{{ $store.state.auth.user.username }}</span
-        >
-        <v-btn v-if="$store.state.auth.user" @click="logOut" text class="ml-3">
-          <v-icon dense class="mt-1 mr-1">fas fa-power-off</v-icon>
-          安全退出
-        </v-btn>
-      </v-toolbar-title>
+      <v-menu v-if="$store.state.auth.user" bottom offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="rgba(0, 0, 0, 0)"
+            dark
+            v-bind="attrs"
+            v-on="on"
+            height="50px"
+            text
+            class="pa-0"
+          >
+            <v-list-item-avatar color="blue" class="pa-0">
+              <span class="white--text pa-0">
+                {{ $store.state.auth.user.username[0].toUpperCase() }}
+              </span>
+            </v-list-item-avatar>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>
+              {{ $store.state.auth.user.username }}
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>修改密码</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="logout">
+            <v-list-item-title>退出登录</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
       <v-btn
         v-if="!$store.state.auth.user"
         @click="isShowLoginForm = true"
@@ -170,10 +195,6 @@ export default {
     isLoginForm: Boolean,
     loginModel: {},
     registerModule: {},
-    // registerUname: '',
-    // registerPwd: '',
-    // registerRepwd: '',
-    // isCanRegister: false,
     message: '',
     color: 'error',
     mode: '',
@@ -184,21 +205,6 @@ export default {
     y: 'top',
   }),
   methods: {
-    async login() {
-      if (
-        this.loginModel.username != undefined &&
-        this.loginModel.password != undefined
-      ) {
-        await this.$auth.loginWith('local', {
-          data: this.loginModel,
-        })
-        this.loginModel = {}
-        this.isShowLoginForm = false
-      }else{
-        this.text = '用户名密码不能为空'
-        this.snackbar = true
-      }
-    },
     async register() {
       if (
         this.registerModule.username != undefined &&
@@ -235,7 +241,22 @@ export default {
         this.snackbar = true
       }
     },
-    logOut() {
+    async login() {
+      if (
+        this.loginModel.username != undefined &&
+        this.loginModel.password != undefined
+      ) {
+        await this.$auth.loginWith('local', {
+          data: this.loginModel,
+        })
+        this.loginModel = {}
+        this.isShowLoginForm = false
+      } else {
+        this.text = '用户名密码不能为空'
+        this.snackbar = true
+      }
+    },
+    logout() {
       this.$auth.logout()
     },
   },
