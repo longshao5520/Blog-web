@@ -9,6 +9,8 @@ import { CatesModule } from './cates/cates.module';
 import { FriendsModule } from './friends/friends.module';
 import { HomeModule } from './home/home.module';
 import { AuthModule } from './auth/auth.module';
+import { CommentsController } from './comments/comments.controller';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -20,8 +22,9 @@ import { AuthModule } from './auth/auth.module';
     PhotosModule,
     MessagesModule,
     AuthModule,
+    CommentsModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, CommentsController],
   providers: [AppService],
 })
 export class AppModule { }
