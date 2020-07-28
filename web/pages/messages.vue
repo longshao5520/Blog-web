@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-26 22:16:51
+ * @LastEditTime: 2020-07-28 19:31:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\index.vue
@@ -48,11 +48,6 @@
           </v-list-item-content>
 
           <v-row align="center" justify="end" class="pr-5">
-            <!-- <v-icon class="mr-1">mdi-heart</v-icon>
-            <span class="subheading mr-2">256</span>
-            <span class="mr-1">·</span>
-            <v-icon class="mr-1">mdi-share-variant</v-icon>
-            <span class="subheading">45</span> -->
             <v-icon dense class="ml-3">fas fa-clock</v-icon>
             <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
           </v-row>
@@ -94,7 +89,7 @@ export default {
         } else if (!this.isRule(this.connect)) {
           this.text = '内容仅限中文和数字！'
           this.snackbar = true
-        } else if (this.connect.length > 100) {
+        } else if (this.connect.length > 30) {
           this.text = '字数超出限制！'
           this.snackbar = true
         } else {

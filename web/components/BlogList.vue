@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-22 21:27:36
+ * @LastEditTime: 2020-07-28 17:50:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BlogList.vue
@@ -29,11 +29,16 @@
         </v-list-item>
       </v-card-subtitle>
       <v-divider class="ml-5 mr-5"></v-divider>
-      <v-card-text class="ml-3 text--primary">
-        <v-icon dense>fas fa-user</v-icon>
-        <span class="ml-1">{{ item.author }}</span>
-        <v-icon dense class="ml-3">fas fa-clock</v-icon>
-        <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
+
+      <v-card-text class="mr-3 text--primary">
+        <v-row align="center" justify="end" class="pr-5">
+          <v-icon dense class="mr-1">fas fa-user</v-icon>
+          <span class="ml-1">{{ item.author }}</span>
+          <v-icon dense class="ml-3 mr-1">fas fa-eye</v-icon>
+          <span class="ml-1">45</span>
+          <v-icon dense class="ml-3 mr-1">fas fa-clock</v-icon>
+          <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
+        </v-row>
       </v-card-text>
     </v-card>
     <v-pagination

@@ -1,31 +1,33 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-22 21:27:07
+ * @LastEditTime: 2020-07-28 19:03:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BackTop.vue
---> 
+-->
 <template>
   <div class="test-box">
-    <div class="scrollTop" v-show="showTop" @click="gotop">
-      <!-- <v-icon color="white" large>fas fa-caret-up</v-icon> -->
-      <i>top</i>
-    </div>
+    <transition>
+      <div class="scrollTop" v-show="showTop" @click="gotop">
+        <!-- <v-icon color="white" large>fas fa-caret-up</v-icon> -->
+        <i>top</i>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      scrollTop: 0
+      scrollTop: 0,
     }
   },
   computed: {
-    showTop: function() {
+    showTop: function () {
       let value = this.scrollTop > 300 ? true : false
       return value
-    }
+    },
   },
   mounted() {
     window.addEventListener('scroll', this.getScrollTop)
@@ -46,15 +48,15 @@ export default {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>
 .scrollTop {
   position: fixed;
-  right: 5%;
-  bottom: 10%;
+  right: 3%;
+  bottom: 5%;
   background-color: #666;
   color: white;
   width: 3rem;
@@ -63,8 +65,23 @@ export default {
   border-radius: 50%;
   text-align: center;
   font-size: 1.3rem;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   z-index: 5;
+}
+.v-enter {
+  opacity: 0;
+}
+
+.v-enter-active {
+  transition: all .5s linear;
+}
+
+.v-leave {
+  opacity: 1;
+}
+
+.v-leave-active {
+  bottom: -100px;
+  transition: all 0.3s linear;
 }
 </style>

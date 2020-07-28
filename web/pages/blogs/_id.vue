@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-27 10:45:34
+ * @LastEditTime: 2020-07-28 16:38:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\blogs\_id.vue
@@ -58,10 +58,10 @@
 
         <v-row align="center" justify="end" class="pr-5">
           <!-- <v-icon class="mr-1">mdi-heart</v-icon>
-            <span class="subheading mr-2">256</span>
-            <span class="mr-1">·</span>
-            <v-icon class="mr-1">mdi-share-variant</v-icon>
-            <span class="subheading">45</span> -->
+          <span class="subheading mr-2">256</span>
+          <span class="mr-1">·</span>
+          <v-icon class="mr-1">mdi-share-variant</v-icon>
+          <span class="subheading">45</span> -->
           <v-icon dense class="ml-3">fas fa-clock</v-icon>
           <span class="ml-1">{{ item.createdAt | dataFormat }}</span>
         </v-row>
@@ -127,7 +127,9 @@ export default {
   }),
   methods: {
     async fetch() {
-      this.comments = await this.$axios.$get(`comments?id=${this.blog._id}&limit=5`)
+      this.comments = await this.$axios.$get(
+        `comments?id=${this.blog._id}&limit=5`
+      )
     },
     async addComment() {
       if (this.isLogin) {
@@ -137,7 +139,7 @@ export default {
         } else if (!this.isRule(this.comment)) {
           this.text = '内容仅限中文和数字！'
           this.snackbar = true
-        } else if (this.comment.length > 100) {
+        } else if (this.comment.length > 30) {
           this.text = '字数超出限制！'
           this.snackbar = true
         } else {
