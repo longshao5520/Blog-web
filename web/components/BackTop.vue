@@ -1,20 +1,20 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-28 19:03:40
+ * @LastEditTime: 2020-07-29 16:09:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BackTop.vue
 -->
 <template>
-  <div class="test-box">
-    <transition>
-      <div class="scrollTop" v-show="showTop" @click="gotop">
-        <!-- <v-icon color="white" large>fas fa-caret-up</v-icon> -->
-        <i>top</i>
-      </div>
-    </transition>
-  </div>
+  <transition
+    enter-active-class="animated bounceInRight"
+    leave-active-class="animated bounceOutDown"
+  >
+    <div class="scrollTop" v-show="showTop" @click="gotop">
+      <i>top</i>
+    </div>
+  </transition>
 </template>
 <script>
 export default {
@@ -67,21 +67,5 @@ export default {
   font-size: 1.3rem;
   cursor: pointer;
   z-index: 5;
-}
-.v-enter {
-  opacity: 0;
-}
-
-.v-enter-active {
-  transition: all .5s linear;
-}
-
-.v-leave {
-  opacity: 1;
-}
-
-.v-leave-active {
-  bottom: -100px;
-  transition: all 0.3s linear;
 }
 </style>
