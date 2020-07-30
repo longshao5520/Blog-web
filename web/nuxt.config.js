@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-29 15:04:16
+ * @LastEditTime: 2020-07-30 14:19:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\nuxt.config.js
@@ -10,6 +10,10 @@ import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 export default {
   mode: 'universal',
+  server:{
+    port: 3300,
+    host: 'localhost',
+  },
   head: {
     titleTemplate: `%s${process.env.APP_NAME}`,
     title: `%s${process.env.APP_NAME}` || '',

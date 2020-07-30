@@ -4,11 +4,7 @@
   "description": "My solid Nuxt.js project",
   "author": "longshao",
   "private": true,
-  "config": {
-    "nuxt": {
-      "host": "0.0.0.0"
-    }
-  },
+  "config": {},
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
