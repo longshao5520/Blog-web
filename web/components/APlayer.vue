@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-21 16:56:42
+ * @LastEditTime: 2020-07-31 15:54:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\APlayer.vue
@@ -17,7 +17,7 @@
         theme="#2980b9"
         mini="true"
         fixed="true"
-        autoplay="false"
+        autoplay="true"
         order="random"
       ></meting-js>
     </div>
