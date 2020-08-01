@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-29 16:23:50
+ * @LastEditTime: 2020-08-01 09:48:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\pages\blogs\_id.vue
@@ -70,6 +70,7 @@
 
 <script>
 import marked from 'marked'
+import hljs from 'highlight.js'
 
 export default {
   async asyncData({ params, $axios, store }) {
@@ -95,9 +96,12 @@ export default {
     ]
     marked.setOptions({
       renderer: new marked.Renderer(),
+      highlight: function (code) {
+        return hljs.highlightAuto(code).value
+      },
       gfm: true,
       tables: true,
-      breaks: false,
+      breaks: true,
       pedantic: false,
       sanitize: false,
       smartLists: true,
