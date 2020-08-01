@@ -1,15 +1,15 @@
 <!--
  * @Author: your name
  * @Date: 2020-06-12 09:23:10
- * @LastEditTime: 2020-07-29 16:09:36
+ * @LastEditTime: 2020-07-31 20:26:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Nest-Vue-Blog\web\components\BackTop.vue
 -->
 <template>
   <transition
-    enter-active-class="animated bounceInRight"
-    leave-active-class="animated bounceOutDown"
+    enter-active-class="animate__animated animate__bounceInRight"
+    leave-active-class="animate__animated animate__bounceOutDown"
   >
     <div class="scrollTop" v-show="showTop" @click="gotop">
       <i>top</i>
